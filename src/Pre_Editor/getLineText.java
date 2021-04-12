@@ -1,22 +1,14 @@
 package Pre_Editor;
 
-import java.awt.Rectangle;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.*;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.text.BadLocationException;
+import java.awt.*;
 
 public class getLineText {
-	 public static int caretposition;
-		public static String linetext;
+	 public static int caretPosition;
+		public static String lineText;
 		public static int row=0,column=0;
     public getLineText(JTextArea textArea) {
 
@@ -55,8 +47,8 @@ public class getLineText {
           
                      //打印偏移量
                      String str = dArea.getText(start, end-start); 
-                     caretposition=dArea.getCaretPosition();
-                     linetext=str;
+                     caretPosition =dArea.getCaretPosition();
+                     lineText =str;
                    
                    
                      //对所点击的JTxtarea行的文本信息进行赋值

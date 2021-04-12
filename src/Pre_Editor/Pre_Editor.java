@@ -5,8 +5,6 @@ import com.bulenkov.darcula.DarculaLaf;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
 
 public class Pre_Editor {
 
@@ -16,7 +14,7 @@ public class Pre_Editor {
     public EditorMenu editorMenu;
     public Tray tray;
     public Settings settings;
-    Point pressedPoint;
+    public Bottom bottom;
 
     //Main
     public static void main(String[] args) {
@@ -33,7 +31,7 @@ public class Pre_Editor {
         this.tray = new Tray(this);
         this.writingArea = new WritingArea(this);
         this.settings = new Settings(this);
-
+        this.bottom=new Bottom(this);
 
     }//end of Constructor
 
@@ -42,7 +40,7 @@ public class Pre_Editor {
     public void initializeMainframe() {
 
         mainframe = new JFrame();
-        mainframe.setUndecorated(true);
+        mainframe.setUndecorated(false);
         //Basic attribute of mainframe
 
         //Set size
@@ -51,44 +49,7 @@ public class Pre_Editor {
                 screenSize.height / 4));
         mainframe.setSize(new Dimension(screenSize.width / 2,
                 screenSize.height / 2));
-        mainframe.addMouseMotionListener(new MouseMotionAdapter() {
-            public void mousePressed(MouseEvent e) { //鼠标按下事件
-                pressedPoint = e.getPoint(); //记录鼠标坐标
-            }
-            public void mouseMoved(MouseEvent e) {
-                System.out.println("Hello1");
-                if (e.getSource() == mainframe) {
-                    System.out.println("Hello");
-                    int WIDTH = mainframe.getWidth();
-                    int HIGHT = mainframe.getHeight();
 
-                    if (e.getX() <= 1) {//左边界
-                        System.out.println("L\n");
-                        mainframe.setCursor(Cursor.getPredefinedCursor(Cursor.W_RESIZE_CURSOR));
-                    } else if (e.getX() >= WIDTH - 1) {//右边界
-                        System.out.println("R\n");
-                        mainframe.setCursor(Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR));
-                    } else if (e.getY() <= 1) {//上边界
-                        System.out.println("U\n");
-                        mainframe.setCursor(Cursor.getPredefinedCursor(Cursor.N_RESIZE_CURSOR));
-                    } else if (e.getY() >= HIGHT - 1) {//下边界
-                        System.out.println("D\n");
-                        mainframe.setCursor(Cursor.getPredefinedCursor(Cursor.S_RESIZE_CURSOR));
-                    }
-                } else {
-                    mainframe.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));//默认光标
-                }
-            }
-        });
-        mainframe.addMouseMotionListener(new MouseMotionAdapter() {
-            public void mouseDragged(MouseEvent e) { // 鼠标拖拽事件
-                Point point = e.getPoint();// 获取当前坐标
-                Point locationPoint = mainframe.getLocation();// 获取窗体坐标
-                int x = locationPoint.x + point.x - pressedPoint.x;// 计算移动后的新坐标
-                int y = locationPoint.y + point.y - pressedPoint.y;
-                mainframe.setLocation(x, y);// 改变窗体位置
-            }
-        });
 
 
 
