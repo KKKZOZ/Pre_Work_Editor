@@ -13,7 +13,7 @@ public class EditorMenu {
 
     //Field
     private Pre_Editor editor;
-    private  MenuActionListener menuActionListener=new MenuActionListener();
+    private MenuActionListener menuActionListener = new MenuActionListener();
 
     public JMenuBar menuBar = new JMenuBar();
     public JMenu menu = null;
@@ -21,14 +21,13 @@ public class EditorMenu {
 
     //Constructor
     public EditorMenu(Pre_Editor editor) {
-        this.editor=editor;
+        this.editor = editor;
         this.createMenuBar();
     }
 
 
-
     //Method
-     public void createMenuBar() {
+    public void createMenuBar() {
         //create the elements of menubar
 
 
@@ -46,8 +45,29 @@ public class EditorMenu {
                 KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK), false));
         file.add(new MenuDetail("Quick Operation", 'q',
                 KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK), false));
+        creatMenuItem(file);
 
-        for (MenuDetail m : file) {
+
+
+        menu = new JMenu("Tools");
+        menu.setMnemonic('T');
+        ArrayList<MenuDetail> tools = new ArrayList<MenuDetail>();
+        tools.add(new MenuDetail("Calculate", 'c', null, false));
+        creatMenuItem(tools);
+
+
+
+        //Menu fo Settings
+        menu = new JMenu("Settings");
+        menu.setMnemonic('s');
+        ArrayList<MenuDetail> settings = new ArrayList<MenuDetail>();
+        settings.add(new MenuDetail("Settings", 's', null, true));
+        creatMenuItem(settings);
+
+    }//End of createMenuBar
+
+    private void creatMenuItem(ArrayList<MenuDetail> item) {
+        for (MenuDetail m : item) {
             menuItem = new JMenuItem(m.menuName, m.accelerator);
             menuItem.setAccelerator(m.keyStroke);
             menuItem.setActionCommand(m.menuName);
@@ -62,32 +82,9 @@ public class EditorMenu {
         menuBar.add(menu);
         editor.mainframe.setJMenuBar(menuBar);
         editor.mainframe.setVisible(true);
-
-
-
-
-        //Menu fo Format
-        menu = new JMenu("Format");
-        menu.setMnemonic('m');
-        ArrayList<MenuDetail> format=new ArrayList<MenuDetail>();
-        format.add(new MenuDetail("Format", 'f', null, true));
-
-
-        for (MenuDetail m : format) {
-            menuItem = new JMenuItem(m.menuName, m.accelerator);
-            menuItem.setAccelerator(m.keyStroke);
-            menuItem.setActionCommand(m.menuName);
-            menuItem.addActionListener(menuActionListener);
-            menu.add(menuItem);
-            if (m.separatorBelow) {
-                menu.addSeparator();
-            }
-        }
-        menuBar.add(menu);
-        editor.mainframe.setJMenuBar(menuBar);
-        editor.mainframe.setVisible(true);
     }
-      class MenuActionListener implements ActionListener {
+
+    class MenuActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if ("New".equals(e.getActionCommand())) {
@@ -105,14 +102,18 @@ public class EditorMenu {
                 Quick_Operation quick_operation = new Quick_Operation(editor);
 
             }
-            if ("Format".equals(e.getActionCommand())) {
-                formatDialog();
+            if ("Settings".equals(e.getActionCommand())) {
+                SettingsDialog();
+            }
+            if ("Calculate".equals(e.getActionCommand())) {
+
+                new calculate(editor);
             }
 
-        }
-    }//end of MenuActionListener
+        }//End of actionPerformed
+    }//End of MenuActionListener
 
-    private void formatDialog() {
+    private void SettingsDialog() {
         editor.settings.setVisible();
     }
 

@@ -13,10 +13,10 @@ public class MenuDetail {
     //Constructor
     public MenuDetail(String name, char accelerator, KeyStroke keyStroke,
                       boolean sepBelow) {
-        this.menuName=name;
-        this.actionLabel=name;
-        this.accelerator=accelerator;
-        this.keyStroke=keyStroke;
-        this.separatorBelow =sepBelow;
+        this.menuName = name;
+        this.actionLabel = name;
+        this.accelerator = accelerator;
+        this.keyStroke = keyStroke;
+        this.separatorBelow = sepBelow;
     }
 }
