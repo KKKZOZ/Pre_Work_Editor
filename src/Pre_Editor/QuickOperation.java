@@ -10,7 +10,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyVetoException;
 import java.beans.VetoableChangeListener;
 
-public class Quick_Operation {
+public class QuickOperation {
 
 
     //Field
@@ -20,7 +20,7 @@ public class Quick_Operation {
     public JInternalFrame internalFrame;
 
     //Constructor
-    public Quick_Operation(Pre_Editor editor) {
+    public QuickOperation(Pre_Editor editor) {
         this.editor=editor;
         this.createPopBar(editor.mainframe);
     }

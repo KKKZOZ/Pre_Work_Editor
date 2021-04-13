@@ -14,14 +14,15 @@ public class Pre_Editor {
     public EditorMenu editorMenu;
     public Tray tray;
     public Settings settings;
-    public Bottom bottom;
-
+    public StatusBar statusBar;
+    public Actions actions;
     //Main
     public static void main(String[] args) {
         initializeUI();
         new Pre_Editor();
 
     }
+
 
     //Constructor
     public Pre_Editor() {
@@ -31,8 +32,8 @@ public class Pre_Editor {
         this.tray = new Tray(this);
         this.writingArea = new WritingArea(this);
         this.settings = new Settings(this);
-        this.bottom=new Bottom(this);
-
+        this.statusBar =new StatusBar(this);
+        this.actions = new Actions(this);
     }//end of Constructor
 
 

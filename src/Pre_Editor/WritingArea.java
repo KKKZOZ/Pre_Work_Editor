@@ -10,6 +10,8 @@ public class WritingArea {
     private Pre_Editor editor;
     public JSplitPane writingArea;
     public JTextArea textArea;
+    public CurrentLineInfo currentLineInfo;
+    private String fileDir;
 
 
     //Constructor
@@ -18,11 +20,13 @@ public class WritingArea {
         this.writingArea = new JSplitPane();
         this.textArea = new JTextArea();
         this.createWritingArea();
+        currentLineInfo=new CurrentLineInfo(textArea);
+        this.fileDir = "";
     }
 
 
     //Method
-
+   
 
     public void createWritingArea() {
         //Create objects
@@ -56,6 +60,14 @@ public class WritingArea {
         editor.mainframe.setVisible(true);
 
 
-        new getLineText(textArea);
+        new CurrentLineInfo(textArea);
+    }//End of createWritingArea
+
+    public String getFileDir() {
+        return fileDir;
+    }
+
+    public void setFileDir(String fileDir) {
+        this.fileDir = fileDir;
     }
 }

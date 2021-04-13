@@ -10,7 +10,6 @@ public class FontChooser {
     private JCheckBox bold;
     private JCheckBox italic;
     public JPanel parentPanel;
-    private JPanel defaultPane;
 
     private JTextArea textArea;
     private JPanel contentPanel = new JPanel(new BorderLayout());

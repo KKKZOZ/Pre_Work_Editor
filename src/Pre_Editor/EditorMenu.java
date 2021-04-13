@@ -90,16 +90,19 @@ public class EditorMenu {
             if ("New".equals(e.getActionCommand())) {
                 System.out.println("New");
                 //new calculate(editor);
+                new QuickCommand(editor);
             }
             if ("Open".equals(e.getActionCommand())) {
                 System.out.println("Open");
+                editor.actions.openFile();
             }
             if ("Save".equals(e.getActionCommand())) {
                 System.out.println("Save");
+                editor.actions.saveFile();
             }
             if ("Quick Operation".equals(e.getActionCommand())) {
                 System.out.println("Quick Operation");
-                Quick_Operation quick_operation = new Quick_Operation(editor);
+                QuickOperation quick_operation = new QuickOperation(editor);
 
             }
             if ("Settings".equals(e.getActionCommand())) {
