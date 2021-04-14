@@ -6,6 +6,9 @@ import com.bulenkov.darcula.DarculaLaf;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * @author KKKZOZ
+ */
 public class Pre_Editor {
 
     //Field
@@ -56,7 +59,7 @@ public class Pre_Editor {
 
 
         mainframe.setVisible(true);
-        mainframe.setTitle("Editor");
+        mainframe.setTitle("Pre_Editor");
         mainframe.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
 

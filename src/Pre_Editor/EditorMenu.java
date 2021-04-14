@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -53,6 +54,8 @@ public class EditorMenu {
         menu.setMnemonic('T');
         ArrayList<MenuDetail> tools = new ArrayList<MenuDetail>();
         tools.add(new MenuDetail("Calculate", 'c', null, false));
+        tools.add(new MenuDetail("Cmd", 'd',
+                KeyStroke.getKeyStroke(KeyEvent.VK_I, InputEvent.CTRL_MASK), false));
         creatMenuItem(tools);
 
 
@@ -89,7 +92,6 @@ public class EditorMenu {
         public void actionPerformed(ActionEvent e) {
             if ("New".equals(e.getActionCommand())) {
                 System.out.println("New");
-                //new calculate(editor);
                 new QuickCommand(editor);
             }
             if ("Open".equals(e.getActionCommand())) {
@@ -110,7 +112,18 @@ public class EditorMenu {
             }
             if ("Calculate".equals(e.getActionCommand())) {
 
-                new calculate(editor);
+                new Calculate(editor);
+            }
+            if ("Cmd".equals(e.getActionCommand())) {
+                Runtime runtime = Runtime.getRuntime();
+                try {
+                    String[] cmd=new String[] {"javac -encoding UTF-8 Editor.java","java Editor"};
+                     Process process=runtime.exec(cmd);
+
+//                    Process process1= runtime.exec("cmd /k start javac hello.java");
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
             }
 
         }//End of actionPerformed

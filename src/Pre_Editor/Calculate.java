@@ -3,16 +3,16 @@ package Pre_Editor;
 import javax.swing.JOptionPane;
 
 
-public class calculate {
+public class Calculate {
     //private CurrentLineInfo currentLineInfo;
-    private static int isint = 1;
+    private static int isInt = 1;
     private static int ASD;
     private static int choice = 0;
 
     //choice 为选择答案形式：0->auto
 //    						1->integer
 //    						2->float
-    public calculate(Pre_Editor editor) {
+    public Calculate(Pre_Editor editor) {
 
         String originline = editor.writingArea.currentLineInfo.getLineText();
 
@@ -112,15 +112,15 @@ public class calculate {
         return Integer.parseInt(s.trim());
     }
 
-    public static void setchoice(int mychoice) {
-        choice = mychoice;
+    public static void setChoice(int myChoice) {
+        choice = myChoice;
     }
 
     public static void setIsInt(int choice) {
-        isint = choice;
+        isInt = choice;
     }
 
     public int getIsInt() {
-        return isint;
+        return isInt;
     }
 }

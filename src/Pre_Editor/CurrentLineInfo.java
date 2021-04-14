@@ -6,6 +6,9 @@ import javax.swing.event.CaretListener;
 import javax.swing.text.BadLocationException;
 import java.awt.*;
 
+/**
+ * @author ZHW
+ */
 public class CurrentLineInfo {
     private int caretPosition;
     private String lineText;
@@ -19,6 +22,7 @@ public class CurrentLineInfo {
 
         textArea.addCaretListener(new CaretListener() {
 
+            @Override
             public void caretUpdate(CaretEvent e) {
 
                 JTextArea dArea = (JTextArea) e.getSource();

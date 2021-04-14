@@ -90,7 +90,7 @@ public class Tray {
             popupMenu.add(exitItem);
 
             // Create a tray icon
-            TrayIcon trayIcon = new TrayIcon(image, "Editor Master", popupMenu);
+            TrayIcon trayIcon = new TrayIcon(image, "others.Editor Master", popupMenu);
 
             // Tray icon adaptive size
             trayIcon.setImageAutoSize(true);

@@ -54,7 +54,7 @@ public class Settings {
 
     private void createTree() {
         //创建根节点
-        DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("Editor");
+        DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("others.Editor");
 
         //创建二级节点
         DefaultMutableTreeNode generalNode = new DefaultMutableTreeNode("General");
@@ -89,7 +89,7 @@ public class Settings {
     }//End of createTree
 
     private void actionPerform(String action) {
-        if ("[Editor, General, Font]".equals(action)) {
+        if ("[others.Editor, General, Font]".equals(action)) {
             FontChooser fontChooser = new FontChooser(editor);
             settingPanel.add(fontChooser.parentPanel, BorderLayout.CENTER);
         }

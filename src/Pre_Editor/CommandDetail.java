@@ -1,5 +1,8 @@
 package Pre_Editor;
 
+/**
+ * @author KKKZOZ
+ */
 public class CommandDetail {
     //Field
     private String commandName;
