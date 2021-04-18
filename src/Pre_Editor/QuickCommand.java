@@ -15,7 +15,7 @@ public class QuickCommand {
     //Constructor
     public QuickCommand(Pre_Editor editor) {
         this.editor = editor;
-        this.lineInfo = editor.writingArea.currentLineInfo;
+        this.lineInfo = editor.writingArea.getCurrentLineInfo();
         commandList = new ArrayList<CommandDetail>();
         commandList.add(new CommandDetail("open", OPEN_FILE));
         commandList.add(new CommandDetail("save", SAVE_FILE));

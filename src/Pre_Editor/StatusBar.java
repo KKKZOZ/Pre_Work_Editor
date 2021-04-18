@@ -42,8 +42,8 @@ public class StatusBar {
         public BottomLabel(Pre_Editor editor, JTextArea textArea) {
 
             label.setText("column "
-                    + editor.writingArea.currentLineInfo.getColumn() + "      row "
-                    + editor.writingArea.currentLineInfo.getRow() + "     "
+                    + editor.writingArea.getCurrentLineInfo().getColumn() + "      row "
+                    + editor.writingArea.getCurrentLineInfo().getRow() + "     "
                     + textArea.getText().length() + " all    ");
 
             textArea.addCaretListener(new CaretListener() {
@@ -52,8 +52,8 @@ public class StatusBar {
 
                     new CurrentLineInfo(textArea);
                     label.setText("column "
-                            + editor.writingArea.currentLineInfo.getColumn() + "      row "
-                            + editor.writingArea.currentLineInfo.getRow() + "     "
+                            + editor.writingArea.getCurrentLineInfo().getColumn() + "      row "
+                            + editor.writingArea.getCurrentLineInfo().getRow() + "     "
                             + textArea.getText().length() + " all    ");
                 }
             });

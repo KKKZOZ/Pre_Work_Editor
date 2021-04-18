@@ -2,6 +2,8 @@ package Pre_Editor;
 
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
+import org.fife.ui.rsyntaxtextarea.SyntaxScheme;
+import org.fife.ui.rsyntaxtextarea.Token;
 import org.fife.ui.rtextarea.Gutter;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
@@ -19,9 +21,9 @@ public class WritingArea {
     private Pre_Editor editor;
     public JSplitPane writingArea;
     public RSyntaxTextArea textArea;
-    public RTextScrollPane textScrollPane;
+    private RTextScrollPane textScrollPane;
     public Gutter gutter;
-    public CurrentLineInfo currentLineInfo;
+    private CurrentLineInfo currentLineInfo;
     private String fileDir;
 
 
@@ -51,9 +53,32 @@ public class WritingArea {
         textArea.setCloseCurlyBraces(true);
         textArea.setPopupMenu(null);
         textArea.setBracketMatchingEnabled(true);
-        textArea.setCurrentLineHighlightColor(Color.CYAN);
+        textArea.setCurrentLineHighlightColor(new Color(80,80,80));
+        textArea.setBackground(Color.DARK_GRAY);
+        textArea.setForeground(Color.LIGHT_GRAY);
+        textArea.setSelectionColor(new Color(50,50,255));
+        ChangeStyle();
     }
 
+    private void ChangeStyle() {
+
+        SyntaxScheme scheme = textArea.getSyntaxScheme();
+
+        scheme.getStyle(Token.RESERVED_WORD).foreground = Color.ORANGE;
+        scheme.getStyle(Token.RESERVED_WORD_2).foreground = Color.ORANGE;
+        scheme.getStyle(Token.OPERATOR).foreground = Color.lightGray;
+        scheme.getStyle(Token.DATA_TYPE).foreground = Color.ORANGE;
+        scheme.getStyle(Token.LITERAL_STRING_DOUBLE_QUOTE).underline = true;
+        scheme.getStyle(Token.VARIABLE).foreground = Color.YELLOW;
+        scheme.getStyle(Token.LITERAL_BOOLEAN).foreground = Color.YELLOW;
+        scheme.getStyle(Token.LITERAL_NUMBER_FLOAT).foreground = Color.YELLOW;
+        scheme.getStyle(Token.LITERAL_NUMBER_DECIMAL_INT).foreground = Color.YELLOW;
+        //scheme.getStyle(Token.)
+        scheme.getStyle(Token.COMMENT_EOL).font = new Font("Georgia",
+                Font.ITALIC, 12);
+        scheme.getStyle(Token.COMMENT_MULTILINE).foreground=Color.GREEN;
+        scheme.getStyle(Token.COMMENT_MARKUP).foreground=Color.GREEN;
+    }
     public void createWritingArea() {
         //Create objects
 
@@ -94,5 +119,17 @@ public class WritingArea {
 
     public void setFileDir(String fileDir) {
         this.fileDir = fileDir;
+    }
+
+    public RSyntaxTextArea getTextArea() {
+        return textArea;
+    }
+
+    public RTextScrollPane getTextScrollPane() {
+        return textScrollPane;
+    }
+
+    public CurrentLineInfo getCurrentLineInfo() {
+        return currentLineInfo;
     }
 }

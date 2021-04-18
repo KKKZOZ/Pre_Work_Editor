@@ -14,31 +14,29 @@ public class Calculate {
 //    						2->float
     public Calculate(Pre_Editor editor) {
 
-        String originline = editor.writingArea.currentLineInfo.getLineText();
+        String originline = editor.writingArea.getCurrentLineInfo().getLineText();
 
         String validline = "";
-        if (originline.charAt(originline.length() - 1) == '=')
+        if (originline.charAt(originline.length() - 1) == '=') {
             try {
                 validline = originline.substring(0, originline.length() - 1);
                 opt(validline);
+                int caretPosition = editor.writingArea.getCurrentLineInfo().getCaretPosition();
                 if (choice == 1) {
                     //插入整数
                     editor.writingArea.textArea.replaceRange(((int) (opt(validline)) + ""),
-                            editor.writingArea.currentLineInfo.getCaretPosition(),
-                            editor.writingArea.currentLineInfo.getCaretPosition());
+                            caretPosition, caretPosition);
                 } else if (choice == 2) {
                     editor.writingArea.textArea.replaceRange(Float.toString(opt(validline)),
-                            editor.writingArea.currentLineInfo.getCaretPosition(),
-                            editor.writingArea.currentLineInfo.getCaretPosition());
+                            caretPosition, caretPosition);
                 } else if (!isint(validline))
                     //auto
+                {
                     editor.writingArea.textArea.replaceRange(Float.toString(opt(validline)),
-                            editor.writingArea.currentLineInfo.getCaretPosition(),
-                            editor.writingArea.currentLineInfo.getCaretPosition());
-                else {
+                            caretPosition, caretPosition);
+                } else {
                     editor.writingArea.textArea.replaceRange(((int) (opt(validline)) + ""),
-                            editor.writingArea.currentLineInfo.getCaretPosition(),
-                            editor.writingArea.currentLineInfo.getCaretPosition());
+                            caretPosition, caretPosition);
                 }
             } catch (Exception e) {
                 // TODO 自动生成的 catch 块
@@ -50,7 +48,7 @@ public class Calculate {
                         JOptionPane.ERROR_MESSAGE
                 );
             }
-        else {
+        } else {
             JOptionPane.showMessageDialog(
                     editor.mainframe,
                     "Not compliant",
@@ -63,10 +61,11 @@ public class Calculate {
     }
 
     public Boolean isint(String originString) {
-        for (int i = 0; i < originString.length(); i++)
+        for (int i = 0; i < originString.length(); i++) {
             if (originString.charAt(i) == '/' || originString.charAt(i) == '.') {
                 return false;
             }
+        }
         return true;
     }
 
