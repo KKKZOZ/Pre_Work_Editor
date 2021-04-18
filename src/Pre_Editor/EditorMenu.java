@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 
@@ -92,7 +94,8 @@ public class EditorMenu {
         public void actionPerformed(ActionEvent e) {
             if ("New".equals(e.getActionCommand())) {
                 System.out.println("New");
-                new QuickCommand(editor);
+//                new QuickCommand(editor);
+
             }
             if ("Open".equals(e.getActionCommand())) {
                 System.out.println("Open");
@@ -108,29 +111,44 @@ public class EditorMenu {
 
             }
             if ("Settings".equals(e.getActionCommand())) {
-                SettingsDialog();
+                editor.settings.setVisible();
             }
             if ("Calculate".equals(e.getActionCommand())) {
 
                 new Calculate(editor);
             }
             if ("Cmd".equals(e.getActionCommand())) {
-                Runtime runtime = Runtime.getRuntime();
                 try {
-                    String[] cmd=new String[] {"javac -encoding UTF-8 Editor.java","java Editor"};
-                     Process process=runtime.exec(cmd);
+                    Process proc = Runtime.getRuntime().exec("cmd");
+                    OutputStream out = proc.getOutputStream();
+                    InputStream stdout = proc.getInputStream();
+                    InputStream stderr = proc.getErrorStream();
+                    int len = 0 ;
+                    byte[] bys = new byte[1024];
+                    while ((len = stdout.read(bys)) != -1) {
+                        System.out.println(new String(bys,0,len));
+                    }
 
-//                    Process process1= runtime.exec("cmd /k start javac hello.java");
+                    try {
+                        out.write("ls\n".getBytes());
+                        out.flush();
+                    } catch (Exception es) {
+                        es.printStackTrace();
+                    }
+                    int len1 = 0 ;
+                    byte[] bys1 = new byte[1024];
+                    while ((len1 = stdout.read(bys1)) != -1) {
+                        System.out.println(new String(bys1,0,len1));
+                    }
+
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
+
             }
 
         }//End of actionPerformed
     }//End of MenuActionListener
 
-    private void SettingsDialog() {
-        editor.settings.setVisible();
-    }
 
 }//End of Class EditorMenu

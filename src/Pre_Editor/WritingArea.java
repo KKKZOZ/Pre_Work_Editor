@@ -6,6 +6,7 @@ import org.fife.ui.rtextarea.Gutter;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
@@ -28,10 +29,9 @@ public class WritingArea {
     public WritingArea(Pre_Editor editor) {
         this.editor = editor;
         this.writingArea = new JSplitPane();
-//        this.textArea = new JTextArea();
+//      this.textArea = new JTextArea();
         this.textArea = new RSyntaxTextArea();
         this.initializeTextArea();
-
         this.createWritingArea();
         currentLineInfo = new CurrentLineInfo(textArea);
         this.fileDir = "";
@@ -50,6 +50,8 @@ public class WritingArea {
         textArea.setFadeCurrentLineHighlight(true);
         textArea.setCloseCurlyBraces(true);
         textArea.setPopupMenu(null);
+        textArea.setBracketMatchingEnabled(true);
+        textArea.setCurrentLineHighlightColor(Color.CYAN);
     }
 
     public void createWritingArea() {
