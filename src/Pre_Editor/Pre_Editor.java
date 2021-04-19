@@ -11,7 +11,6 @@ import java.awt.*;
  */
 public class Pre_Editor {
 
-    //Field
     public JFrame mainframe;
     public WritingArea writingArea;
     public EditorMenu editorMenu;
@@ -19,7 +18,8 @@ public class Pre_Editor {
     public Settings settings;
     public StatusBar statusBar;
     public Actions actions;
-    //Main
+
+    /**The main method**/
     public static void main(String[] args) {
         initializeUI();
         new Pre_Editor();
@@ -27,7 +27,7 @@ public class Pre_Editor {
     }
 
 
-    //Constructor
+    /**Constructor**/
     public Pre_Editor() {
 
         this.initializeMainframe();
@@ -35,17 +35,16 @@ public class Pre_Editor {
         this.tray = new Tray(this);
         this.writingArea = new WritingArea(this);
         this.settings = new Settings(this);
-        this.statusBar =new StatusBar(this);
+        this.statusBar = new StatusBar(this);
         this.actions = new Actions(this);
     }//end of Constructor
 
 
-    //Method
+    /**Initialize the mainframe**/
     public void initializeMainframe() {
 
         mainframe = new JFrame();
-        mainframe.setUndecorated(false);
-        //Basic attribute of mainframe
+
 
         //Set size
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -55,9 +54,6 @@ public class Pre_Editor {
                 screenSize.height / 2));
 
 
-
-
-
         mainframe.setVisible(true);
         mainframe.setTitle("Pre_Editor");
         mainframe.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -65,6 +61,7 @@ public class Pre_Editor {
 
         //Set location
         mainframe.setLocation((screenSize.width / 4), (screenSize.height / 4));
+
     }//End of initializeMainframe
 
     public static void initializeUI() {

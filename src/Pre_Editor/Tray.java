@@ -4,9 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * @author ZHW
+ */
 public class Tray {
     //Field
-    private Pre_Editor editor;
+    private final Pre_Editor editor;
 
 
 
@@ -101,20 +104,6 @@ public class Tray {
                 public void mouseClicked(MouseEvent e) {
                     if (e.getClickCount() == 2) {
                         editor.mainframe.setVisible(true);
-                    }
-                    switch (e.getButton()) {
-                        case MouseEvent.BUTTON1: {
-                            break;
-                        }
-                        case MouseEvent.BUTTON2: {
-                            break;
-                        }
-                        case MouseEvent.BUTTON3: {
-                            break;
-                        }
-                        default: {
-                            break;
-                        }
                     }
                 }
             });

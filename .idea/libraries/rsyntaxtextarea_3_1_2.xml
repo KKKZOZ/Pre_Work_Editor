@@ -1,7 +1,8 @@
 <component name="libraryTable">
   <library name="rsyntaxtextarea-3.1.2">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../rsyntaxtextarea-3.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rsyntaxtextarea-3.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/darcula.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

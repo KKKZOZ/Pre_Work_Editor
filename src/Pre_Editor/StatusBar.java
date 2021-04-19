@@ -12,7 +12,7 @@ import java.util.TimerTask;
 
 
 public class StatusBar {
-    //不可编辑文本域
+
     public JTextField textField;
     public JPanel bottomPanel;
     public String time;
@@ -30,8 +30,11 @@ public class StatusBar {
         editor.writingArea.writingArea.setBottomComponent(this.bottomPanel);
     }
 
+    public void clear() {
+        textField.setText("");
+    }
 
-    //创造带有行列号的Label
+
     public class BottomLabel {
         //Field
         public int row;
@@ -48,6 +51,7 @@ public class StatusBar {
 
             textArea.addCaretListener(new CaretListener() {
 
+                @Override
                 public void caretUpdate(CaretEvent e) {
 
                     new CurrentLineInfo(textArea);
@@ -64,13 +68,13 @@ public class StatusBar {
 
     //创建时间
     public class TimeFrame extends JFrame {
+        private final String DEFAULT_TIME_FORMAT = "HH:mm:ss";
+        private final int ONE_SECOND = 1000;
+        public String time;
         /*
          * Variables
          */
         private JLabel displayArea;
-        private String DEFAULT_TIME_FORMAT = "HH:mm:ss";
-        public String time;
-        private int ONE_SECOND = 1000;
 
         public JLabel createFrame(Pre_Editor editor, JTextArea textArea) {
 

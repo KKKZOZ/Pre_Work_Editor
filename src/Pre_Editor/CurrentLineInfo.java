@@ -16,7 +16,6 @@ public class CurrentLineInfo {
     private int column = 0;
 
 
-    
     //Constructor
     public CurrentLineInfo(JTextArea textArea) {
 
@@ -37,7 +36,7 @@ public class CurrentLineInfo {
                     column1 = carePos - dArea.getLineStartOffset(row1);
                     row1 += 1;
                     row = row1;
-                    
+
                     column = column1;
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -57,8 +56,8 @@ public class CurrentLineInfo {
                     //打印偏移量
                     String str = dArea.getText(start, end - start);
                     setCaretPosition(dArea.getCaretPosition());
-                    
-                    
+
+
                     setLineText(str);
 
                     //对所点击的JTextArea行的文本信息进行赋值

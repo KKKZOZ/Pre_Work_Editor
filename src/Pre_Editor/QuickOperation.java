@@ -10,25 +10,26 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyVetoException;
 import java.beans.VetoableChangeListener;
 
+/**
+ * @author KKKZOZ
+ */
 public class QuickOperation {
 
 
-    //Field
-    private Pre_Editor editor;
-
     public JDesktopPane desktopPane;
     public JInternalFrame internalFrame;
+    //Field
+    private final Pre_Editor editor;
 
     //Constructor
     public QuickOperation(Pre_Editor editor) {
-        this.editor=editor;
+        this.editor = editor;
         this.createPopBar(editor.mainframe);
     }
 
 
-
     //Method
-    public  void createPopBar(JFrame mainframe) {
+    public void createPopBar(JFrame mainframe) {
         //Initialize
         desktopPane = new JDesktopPane();
         internalFrame = createInternalFrame(mainframe);
@@ -42,7 +43,8 @@ public class QuickOperation {
             e.printStackTrace();
         }
     }
-    public  JInternalFrame createInternalFrame(JFrame mainframe) {
+
+    public JInternalFrame createInternalFrame(JFrame mainframe) {
         System.out.println("!!!");
         //Create an internalFrame
         JInternalFrame internalFrame = new JInternalFrame(
@@ -58,11 +60,12 @@ public class QuickOperation {
 
         internalFrame.addVetoableChangeListener(new VetoableChangeListener() {
 
+            @Override
             public void vetoableChange(PropertyChangeEvent e) throws PropertyVetoException {
                 JInternalFrame frame = (JInternalFrame) e.getSource();
                 String name = e.getPropertyName();
                 Object value = e.getNewValue();
-                if (name.equals("closed") && value.equals(Boolean.TRUE))// 窗口被关闭
+                if ("closed".equals(name) && value.equals(Boolean.TRUE))// 窗口被关闭
                 {
                     System.out.println("窗口被关闭");
                     mainframe.setContentPane(editor.writingArea.writingArea);
@@ -77,8 +80,8 @@ public class QuickOperation {
         panel.add(textField, BorderLayout.NORTH);
         final JList[] cmdList = new JList[1];
 
-        DefaultListModel defaultList = new DefaultListModel();
-        DefaultListModel cmdContent = new DefaultListModel();
+        DefaultListModel<String> defaultList = new DefaultListModel<>();
+        DefaultListModel<String> cmdContent = new DefaultListModel<String>();
         defaultList.addElement("new");
         defaultList.addElement("open");
         defaultList.addElement("save");
@@ -105,7 +108,7 @@ public class QuickOperation {
                 }
                 cmdContent.addElement("exit");
 
-                cmdList[0] = new JList(cmdContent);
+                cmdList[0] = new JList<>(cmdContent);
 
                 panel.add(cmdList[0], BorderLayout.CENTER);
 
@@ -119,8 +122,8 @@ public class QuickOperation {
                         boolean adjust = e.getValueIsAdjusting();
                         if (adjust) {
                             for (int index : indices) {
-                                System.out.println(listModel.getElementAt(index).toString());
-                                String cmdName = listModel.getElementAt(index).toString();
+                                System.out.println(listModel.getElementAt(index));
+                                String cmdName = listModel.getElementAt(index);
                                 if ("new".equals(cmdName)) {
                                     System.out.println("new is finally selected");
                                 }

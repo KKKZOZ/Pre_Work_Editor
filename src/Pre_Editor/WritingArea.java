@@ -17,12 +17,12 @@ import java.awt.event.ComponentEvent;
  */
 public class WritingArea {
 
-    //Field
-    private Pre_Editor editor;
     public JSplitPane writingArea;
     public RSyntaxTextArea textArea;
-    private RTextScrollPane textScrollPane;
     public Gutter gutter;
+    //Field
+    private Pre_Editor editor;
+    private RTextScrollPane textScrollPane;
     private CurrentLineInfo currentLineInfo;
     private String fileDir;
 
@@ -53,14 +53,14 @@ public class WritingArea {
         textArea.setCloseCurlyBraces(true);
         textArea.setPopupMenu(null);
         textArea.setBracketMatchingEnabled(true);
-        textArea.setCurrentLineHighlightColor(new Color(80,80,80));
+        textArea.setCurrentLineHighlightColor(new Color(80, 80, 80));
         textArea.setBackground(Color.DARK_GRAY);
         textArea.setForeground(Color.LIGHT_GRAY);
-        textArea.setSelectionColor(new Color(50,50,255));
-        ChangeStyle();
+        textArea.setSelectionColor(new Color(50, 50, 255));
+        changeStyle();
     }
 
-    private void ChangeStyle() {
+    private void changeStyle() {
 
         SyntaxScheme scheme = textArea.getSyntaxScheme();
 
@@ -76,9 +76,10 @@ public class WritingArea {
         //scheme.getStyle(Token.)
         scheme.getStyle(Token.COMMENT_EOL).font = new Font("Georgia",
                 Font.ITALIC, 12);
-        scheme.getStyle(Token.COMMENT_MULTILINE).foreground=Color.GREEN;
-        scheme.getStyle(Token.COMMENT_MARKUP).foreground=Color.GREEN;
+        scheme.getStyle(Token.COMMENT_MULTILINE).foreground = Color.GREEN;
+        scheme.getStyle(Token.COMMENT_MARKUP).foreground = Color.GREEN;
     }
+
     public void createWritingArea() {
         //Create objects
 
@@ -96,6 +97,7 @@ public class WritingArea {
         writingArea.setContinuousLayout(true);
         writingArea.setOneTouchExpandable(false);
         writingArea.setDividerSize(5);
+        //writingArea.setDividerLocation(0.98);
 
 
         writingArea.addComponentListener(new ComponentAdapter() {
@@ -111,6 +113,7 @@ public class WritingArea {
 
 
         new CurrentLineInfo(textArea);
+        writingArea.setDividerLocation(0.02);
     }//End of createWritingArea
 
     public String getFileDir() {

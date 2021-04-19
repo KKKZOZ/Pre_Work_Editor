@@ -3,11 +3,14 @@ package Pre_Editor;
 import javax.swing.*;
 import java.io.*;
 
+/**
+ * @author KKKZOZ
+ */
 public class Actions {
+    public static final int OPEN_FILE = 0;
+    public static final int SAVE_FILE = 1;
     //Field
-    private Pre_Editor editor;
-    public static final int OPEN_FILE=0;
-    public static final int SAVE_FILE=1;
+    private final Pre_Editor editor;
 
 
     //Constructor
@@ -41,7 +44,7 @@ public class Actions {
 
     public void saveFile() {
         String filePath = editor.writingArea.getFileDir();
-        BufferedWriter bufferedWriter=null;
+        BufferedWriter bufferedWriter = null;
         try {
             bufferedWriter = new BufferedWriter(new FileWriter(filePath, false));
             bufferedWriter.write(editor.writingArea.textArea.getText());

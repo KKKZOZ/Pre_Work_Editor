@@ -17,7 +17,6 @@ public class EditorMenu {
     //Field
     private Pre_Editor editor;
     private MenuActionListener menuActionListener = new MenuActionListener();
-
     public JMenuBar menuBar = new JMenuBar();
     public JMenu menu = null;
     public JMenuItem menuItem = null;
@@ -51,7 +50,6 @@ public class EditorMenu {
         creatMenuItem(file);
 
 
-
         menu = new JMenu("Tools");
         menu.setMnemonic('T');
         ArrayList<MenuDetail> tools = new ArrayList<MenuDetail>();
@@ -59,7 +57,6 @@ public class EditorMenu {
         tools.add(new MenuDetail("Cmd", 'd',
                 KeyStroke.getKeyStroke(KeyEvent.VK_I, InputEvent.CTRL_MASK), false));
         creatMenuItem(tools);
-
 
 
         //Menu fo Settings
@@ -118,36 +115,39 @@ public class EditorMenu {
                 new Calculate(editor);
             }
             if ("Cmd".equals(e.getActionCommand())) {
-                try {
-                    Process proc = Runtime.getRuntime().exec("cmd");
-                    OutputStream out = proc.getOutputStream();
-                    InputStream stdout = proc.getInputStream();
-                    InputStream stderr = proc.getErrorStream();
-                    int len = 0 ;
-                    byte[] bys = new byte[1024];
-                    while ((len = stdout.read(bys)) != -1) {
-                        System.out.println(new String(bys,0,len));
-                    }
-
-                    try {
-                        out.write("ls\n".getBytes());
-                        out.flush();
-                    } catch (Exception es) {
-                        es.printStackTrace();
-                    }
-                    int len1 = 0 ;
-                    byte[] bys1 = new byte[1024];
-                    while ((len1 = stdout.read(bys1)) != -1) {
-                        System.out.println(new String(bys1,0,len1));
-                    }
-
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-
+                new QuickCommand(editor);
             }
 
         }//End of actionPerformed
+
+        public void textScreen() {
+            try {
+                Process proc = Runtime.getRuntime().exec("cmd");
+                OutputStream out = proc.getOutputStream();
+                InputStream stdout = proc.getInputStream();
+                InputStream stderr = proc.getErrorStream();
+                int len = 0;
+                byte[] bys = new byte[1024];
+                while ((len = stdout.read(bys)) != -1) {
+                    System.out.println(new String(bys, 0, len));
+                }
+
+                try {
+                    out.write("ls\n".getBytes());
+                    out.flush();
+                } catch (Exception es) {
+                    es.printStackTrace();
+                }
+                int len1 = 0;
+                byte[] bys1 = new byte[1024];
+                while ((len1 = stdout.read(bys1)) != -1) {
+                    System.out.println(new String(bys1, 0, len1));
+                }
+
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }
     }//End of MenuActionListener
 
 

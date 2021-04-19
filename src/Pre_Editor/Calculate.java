@@ -30,7 +30,7 @@ public class Calculate {
                     editor.writingArea.textArea.replaceRange(Float.toString(opt(validline)),
                             caretPosition, caretPosition);
                 } else if (!isint(validline))
-                    //auto
+                //auto
                 {
                     editor.writingArea.textArea.replaceRange(Float.toString(opt(validline)),
                             caretPosition, caretPosition);

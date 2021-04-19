@@ -8,19 +8,20 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+/**
+ * @author KKKZOZ
+ */
 public class Settings {
     //Fields
+    private final Pre_Editor editor;
     public JDialog settingDialog;
     public JPanel settingPanel;
     public JTree tree;
 
-    private final Pre_Editor editor;
-
     //Constructor
     public Settings(Pre_Editor editor) {
+
         this.editor = editor;
-
-
         settingDialog = new JDialog(editor.mainframe, "Settings", false);
 //        settingDialog.setVisible(true);
         settingDialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -89,7 +90,7 @@ public class Settings {
     }//End of createTree
 
     private void actionPerform(String action) {
-        if ("[others.Editor, General, Font]".equals(action)) {
+        if (SettingsPath.FONT.equals(action)) {
             FontChooser fontChooser = new FontChooser(editor);
             settingPanel.add(fontChooser.parentPanel, BorderLayout.CENTER);
         }
@@ -97,6 +98,10 @@ public class Settings {
 
     public void setVisible() {
         settingDialog.setVisible(true);
+    }
+
+    public class SettingsPath {
+        public final static String FONT = "[others.Editor, General, Font]";
     }
 
 }//End of Class Settings
