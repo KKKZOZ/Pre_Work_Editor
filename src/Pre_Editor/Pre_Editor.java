@@ -18,6 +18,8 @@ public class Pre_Editor {
     public Settings settings;
     public StatusBar statusBar;
     public Actions actions;
+    public JPanel mainPanel;
+    public Multi_use multiUse;
 
     /**The main method**/
     public static void main(String[] args) {
@@ -29,14 +31,16 @@ public class Pre_Editor {
 
     /**Constructor**/
     public Pre_Editor() {
-
+        this.mainPanel= new JPanel(new BorderLayout());
         this.initializeMainframe();
+        this.multiUse = new Multi_use(this);
         this.editorMenu = new EditorMenu(this);
         this.tray = new Tray(this);
         this.writingArea = new WritingArea(this);
         this.settings = new Settings(this);
         this.statusBar = new StatusBar(this);
         this.actions = new Actions(this);
+
     }//end of Constructor
 
 
@@ -61,6 +65,7 @@ public class Pre_Editor {
 
         //Set location
         mainframe.setLocation((screenSize.width / 4), (screenSize.height / 4));
+        mainframe.setContentPane(mainPanel);
 
     }//End of initializeMainframe
 

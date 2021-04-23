@@ -9,28 +9,26 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 /**
  * @author KKKZOZ
  */
 public class WritingArea {
 
-    public JSplitPane writingArea;
+    public JPanel writingArea;
     public RSyntaxTextArea textArea;
     public Gutter gutter;
     //Field
-    private Pre_Editor editor;
+    private final Pre_Editor editor;
     private RTextScrollPane textScrollPane;
-    private CurrentLineInfo currentLineInfo;
+    private final CurrentLineInfo currentLineInfo;
     private String fileDir;
 
 
     //Constructor
     public WritingArea(Pre_Editor editor) {
         this.editor = editor;
-        this.writingArea = new JSplitPane();
+        this.writingArea = new JPanel(new BorderLayout());
 //      this.textArea = new JTextArea();
         this.textArea = new RSyntaxTextArea();
         this.initializeTextArea();
@@ -58,6 +56,7 @@ public class WritingArea {
         textArea.setForeground(Color.LIGHT_GRAY);
         textArea.setSelectionColor(new Color(50, 50, 255));
         changeStyle();
+
     }
 
     private void changeStyle() {
@@ -91,29 +90,31 @@ public class WritingArea {
         //scrollPane.setViewportView(label);
 
         //Set the attribute of splitPane
-        writingArea.setTopComponent(textScrollPane);
-
-        writingArea.setOrientation(JSplitPane.VERTICAL_SPLIT);
-        writingArea.setContinuousLayout(true);
-        writingArea.setOneTouchExpandable(false);
-        writingArea.setDividerSize(5);
+        writingArea.add(textScrollPane, BorderLayout.CENTER);
+//        writingArea.setTopComponent(textScrollPane);
+//
+//        writingArea.setOrientation(JSplitPane.VERTICAL_SPLIT);
+//        writingArea.setContinuousLayout(true);
+//        writingArea.setOneTouchExpandable(false);
+//        writingArea.setDividerSize(5);
         //writingArea.setDividerLocation(0.98);
 
 
-        writingArea.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                writingArea.setDividerLocation(0.98);
-            }
-        });
+//        writingArea.addComponentListener(new ComponentAdapter() {
+//            @Override
+//            public void componentResized(ComponentEvent e) {
+//                writingArea.setDividerLocation(0.98);
+//            }
+//        });
 
 
-        editor.mainframe.setContentPane(writingArea);
+//        editor.mainframe.setContentPane(writingArea);
+        editor.mainPanel.add(writingArea, BorderLayout.CENTER);
         editor.mainframe.setVisible(true);
 
 
         new CurrentLineInfo(textArea);
-        writingArea.setDividerLocation(0.02);
+//        writingArea.setDividerLocation(0.02);
     }//End of createWritingArea
 
     public String getFileDir() {

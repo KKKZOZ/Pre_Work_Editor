@@ -27,7 +27,8 @@ public class StatusBar {
         bottomPanel.add(label.label, BorderLayout.WEST);
         bottomPanel.add(timeFrame.createFrame(editor, textArea), BorderLayout.EAST);
         bottomPanel.add(textField, BorderLayout.CENTER);
-        editor.writingArea.writingArea.setBottomComponent(this.bottomPanel);
+//        editor.writingArea.writingArea.setBottomComponent(this.bottomPanel);
+        editor.multiUse.southPanel.add(bottomPanel, BorderLayout.SOUTH);
     }
 
     public void clear() {

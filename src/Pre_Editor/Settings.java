@@ -55,7 +55,7 @@ public class Settings {
 
     private void createTree() {
         //创建根节点
-        DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("others.Editor");
+        DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("Editor");
 
         //创建二级节点
         DefaultMutableTreeNode generalNode = new DefaultMutableTreeNode("General");
@@ -63,9 +63,12 @@ public class Settings {
         //创建三级节点
         DefaultMutableTreeNode fontNode = new DefaultMutableTreeNode("Font");
 
+        DefaultMutableTreeNode HighlightNode = new DefaultMutableTreeNode("Highlight");
+
 
         //将三级节点添加到二级节点
         generalNode.add(fontNode);
+        generalNode.add(HighlightNode);
 
 
         //将二级节点添加到根节点
@@ -90,9 +93,15 @@ public class Settings {
     }//End of createTree
 
     private void actionPerform(String action) {
-        if (SettingsPath.FONT.equals(action)) {
+        if (SettingsPath.FONT_PATH.equals(action)) {
+            System.out.println(action);
             FontChooser fontChooser = new FontChooser(editor);
             settingPanel.add(fontChooser.parentPanel, BorderLayout.CENTER);
+        }
+        if (SettingsPath.HIGHLIGHT_PATH.equals(action)) {
+            System.out.println("2");
+            CustomizeHighlight customizeHighlight=new CustomizeHighlight(editor);
+            settingPanel.add(customizeHighlight.mainPanel, BorderLayout.CENTER);
         }
     }
 
@@ -101,7 +110,9 @@ public class Settings {
     }
 
     public class SettingsPath {
-        public final static String FONT = "[others.Editor, General, Font]";
+        public final static String FONT_PATH = "[Editor, General, Font]";
+        public final static String HIGHLIGHT_PATH = "[Editor, General, Highlight]";
+
     }
 
 }//End of Class Settings
