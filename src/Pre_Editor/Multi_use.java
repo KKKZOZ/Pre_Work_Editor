@@ -17,6 +17,7 @@ public class Multi_use {
 
         //Temporary
         JTextArea temp = new JTextArea("Test");
+        temp.setRows(8);
         multiPane.addTab("Test", temp);
         southPanel.add(multiPane,BorderLayout.CENTER);
     }

@@ -5,21 +5,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 
 
 public class EditorMenu {
 
 
-    //Field
-    private Pre_Editor editor;
-    private MenuActionListener menuActionListener = new MenuActionListener();
     public JMenuBar menuBar = new JMenuBar();
     public JMenu menu = null;
     public JMenuItem menuItem = null;
+    //Field
+    private Pre_Editor editor;
+    private MenuActionListener menuActionListener = new MenuActionListener();
+    private boolean markdownIsOpen = false;
+    private MarkdownPreview markdownPreview;
 
     //Constructor
     public EditorMenu(Pre_Editor editor) {
@@ -56,6 +55,7 @@ public class EditorMenu {
         tools.add(new MenuDetail("Calculate", 'c', null, false));
         tools.add(new MenuDetail("Cmd", 'd',
                 KeyStroke.getKeyStroke(KeyEvent.VK_I, InputEvent.CTRL_MASK), false));
+        tools.add(new MenuDetail("Markdown Preview", 'M', null, false));
         creatMenuItem(tools);
 
 
@@ -117,37 +117,23 @@ public class EditorMenu {
             if ("Cmd".equals(e.getActionCommand())) {
                 new QuickCommand(editor);
             }
+            if ("Markdown Preview".equals(e.getActionCommand())) {
+                if (!markdownIsOpen) {
+                    markdownPreview = new MarkdownPreview(editor);
+                    markdownIsOpen = true;
+                    return;
+                }
+                if (markdownIsOpen) {
+                    editor.writingArea.writingArea.remove(markdownPreview.markdownPane);
+                    markdownIsOpen = false;
+                    return;
+                }
+
+            }
 
         }//End of actionPerformed
 
-        public void textScreen() {
-            try {
-                Process proc = Runtime.getRuntime().exec("cmd");
-                OutputStream out = proc.getOutputStream();
-                InputStream stdout = proc.getInputStream();
-                InputStream stderr = proc.getErrorStream();
-                int len = 0;
-                byte[] bys = new byte[1024];
-                while ((len = stdout.read(bys)) != -1) {
-                    System.out.println(new String(bys, 0, len));
-                }
 
-                try {
-                    out.write("ls\n".getBytes());
-                    out.flush();
-                } catch (Exception es) {
-                    es.printStackTrace();
-                }
-                int len1 = 0;
-                byte[] bys1 = new byte[1024];
-                while ((len1 = stdout.read(bys1)) != -1) {
-                    System.out.println(new String(bys1, 0, len1));
-                }
-
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-        }
     }//End of MenuActionListener
 
 

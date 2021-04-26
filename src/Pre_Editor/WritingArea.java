@@ -1,14 +1,18 @@
 package Pre_Editor;
 
+import org.fife.rsta.ac.LanguageSupportFactory;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rsyntaxtextarea.SyntaxScheme;
 import org.fife.ui.rsyntaxtextarea.Token;
+import org.fife.ui.rsyntaxtextarea.spell.SpellingParser;
 import org.fife.ui.rtextarea.Gutter;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * @author KKKZOZ
@@ -56,8 +60,25 @@ public class WritingArea {
         textArea.setForeground(Color.LIGHT_GRAY);
         textArea.setSelectionColor(new Color(50, 50, 255));
         changeStyle();
-
+        extendTextArea();
     }
+
+    private void extendTextArea() {
+        LanguageSupportFactory.get().register(textArea);
+        File zip = new File("english_dic.zip");
+        boolean usEnglish = true; // "false" will use British English
+        SpellingParser parser = null;
+        try {
+            parser = SpellingParser.createEnglishSpellingParser(zip, usEnglish);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        textArea.addParser(parser);
+    }
+
+
+
+
 
     private void changeStyle() {
 

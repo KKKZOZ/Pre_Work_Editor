@@ -65,6 +65,35 @@ public class Actions {
     }//End of saveFile
 
 
+    public void createNewLineAbove() {
+        //add one line above the current line
+        StringBuilder sb = new StringBuilder(editor.writingArea.textArea.getText());
+        int a=editor.writingArea.getCurrentLineInfo().getCaretPosition()-
+                editor.writingArea.getCurrentLineInfo().getColumn();//Expected caretlocation
+        sb.insert(a, "\n");
+        editor.writingArea.textArea.setText(sb.toString());
+        editor.writingArea.textArea.setCaretPosition(a);
+    }
+    public void createNewLineBeneath() {
+        //add one line beneath the current line.
+        StringBuilder sb = new StringBuilder(editor.writingArea.textArea.getText());
+        int a=editor.writingArea.getCurrentLineInfo().getCaretPosition()
+                +editor.writingArea.getCurrentLineInfo().getLineText().length()
+                -editor.writingArea.getCurrentLineInfo().getColumn();//Expected caretlocation
+        boolean judge=editor.writingArea.getCurrentLineInfo().getRow()==editor.writingArea.getCurrentLineInfo().getRowCount();
+        sb.insert(a, "\n");
+        editor.writingArea.textArea.setText(sb.toString());
+        if (!judge) {
+
+            editor.writingArea.textArea.setCaretPosition(a);
+        }
+        else {
+            editor.writingArea.textArea.append("");
+            editor.writingArea.textArea.setCaretPosition(a+1);
+        }
+    }
+
+
     public void actionPerforming(int action) {
         if (action == OPEN_FILE) {
             this.openFile();
