@@ -21,6 +21,8 @@ public class Pre_Editor {
     public JPanel mainPanel;
     public Multi_use multiUse;
     public JTabbedPane tabbedPane;
+    public ActionExeManager actionExeManager;
+    public SaveToLocal saveToLocal;
 
     /**The main method**/
     public static void main(String[] args) {
@@ -32,10 +34,10 @@ public class Pre_Editor {
 
     /**Constructor**/
     public Pre_Editor() {
+        this.initializeMainframe();
         this.mainPanel= new JPanel(new BorderLayout());
         this.tabbedPane = new JTabbedPane();
         this.tabbedPane.add("Test",new JPanel());
-        this.initializeMainframe();
         this.multiUse = new Multi_use(this);
         this.editorMenu = new EditorMenu(this);
         this.tray = new Tray(this);
@@ -43,6 +45,8 @@ public class Pre_Editor {
         this.settings = new Settings(this);
         this.statusBar = new StatusBar(this);
         this.actions = new Actions(this);
+        this.actionExeManager = new ActionExeManager(this);
+        this.saveToLocal = new SaveToLocal(this);
     }//end of Constructor
 
 

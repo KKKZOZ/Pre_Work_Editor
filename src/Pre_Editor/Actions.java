@@ -95,10 +95,13 @@ public class Actions {
 
 
     public void actionPerforming(int action) {
-        if (action == OPEN_FILE) {
+        if (action == ActionExeManager.NEW) {
+
+        }
+        if (action == ActionExeManager.OPEN_FILE) {
             this.openFile();
         }
-        if (action == SAVE_FILE) {
+        if (action == ActionExeManager.SAVE_FILE) {
             this.saveFile();
         }
     }

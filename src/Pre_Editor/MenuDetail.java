@@ -1,7 +1,5 @@
 package Pre_Editor;
 
-import javax.swing.*;
-
 /**
  * @author KKKZOZ
  */
@@ -10,16 +8,14 @@ public class MenuDetail {
     public String menuName;
     public String actionLabel;
     public char accelerator;
-    public KeyStroke keyStroke;
     public boolean separatorBelow;
 
     //Constructor
-    public MenuDetail(String name, char accelerator, KeyStroke keyStroke,
+    public MenuDetail(String name, char accelerator,
                       boolean sepBelow) {
         this.menuName = name;
         this.actionLabel = name;
         this.accelerator = accelerator;
-        this.keyStroke = keyStroke;
         this.separatorBelow = sepBelow;
     }
 
@@ -45,14 +41,6 @@ public class MenuDetail {
 
     public void setAccelerator(char accelerator) {
         this.accelerator = accelerator;
-    }
-
-    public KeyStroke getKeyStroke() {
-        return keyStroke;
-    }
-
-    public void setKeyStroke(KeyStroke keyStroke) {
-        this.keyStroke = keyStroke;
     }
 
     public boolean isSeparatorBelow() {

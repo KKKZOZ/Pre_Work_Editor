@@ -3,6 +3,6 @@ package Pre_Editor;
 /**
  * @author KKKZOZ
  */
-public class SettingsLocal {
+public class GetFromLocal {
 
 }

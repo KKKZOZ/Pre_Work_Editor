@@ -3,8 +3,6 @@ package Pre_Editor;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 
@@ -38,24 +36,19 @@ public class EditorMenu {
 
         ArrayList<MenuDetail> file = new ArrayList<MenuDetail>();
 
-        file.add(new MenuDetail("New", 'n',
-                KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK), false));
-        file.add(new MenuDetail("Open", 'o',
-                KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK), false));
-        file.add(new MenuDetail("Save", 's',
-                KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK), false));
-        file.add(new MenuDetail("Quick Operation", 'q',
-                KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK), false));
+        file.add(new MenuDetail("New", 'n', false));
+        file.add(new MenuDetail("Open", 'o', false));
+        file.add(new MenuDetail("Save", 's', false));
+        file.add(new MenuDetail("Quick Operation", 'q', false));
         creatMenuItem(file);
 
 
         menu = new JMenu("Tools");
         menu.setMnemonic('T');
         ArrayList<MenuDetail> tools = new ArrayList<MenuDetail>();
-        tools.add(new MenuDetail("Calculate", 'c', null, false));
-        tools.add(new MenuDetail("Cmd", 'd',
-                KeyStroke.getKeyStroke(KeyEvent.VK_I, InputEvent.CTRL_MASK), false));
-        tools.add(new MenuDetail("Markdown Preview", 'M', null, false));
+        tools.add(new MenuDetail("Calculate", 'c',false));
+        tools.add(new MenuDetail("Cmd", 'd', false));
+        tools.add(new MenuDetail("Markdown Preview", 'M',false));
         creatMenuItem(tools);
 
 
@@ -63,7 +56,7 @@ public class EditorMenu {
         menu = new JMenu("Settings");
         menu.setMnemonic('s');
         ArrayList<MenuDetail> settings = new ArrayList<MenuDetail>();
-        settings.add(new MenuDetail("Settings", 's', null, true));
+        settings.add(new MenuDetail("Settings", 's',true));
         creatMenuItem(settings);
 
     }//End of createMenuBar
@@ -71,7 +64,6 @@ public class EditorMenu {
     private void creatMenuItem(ArrayList<MenuDetail> item) {
         for (MenuDetail m : item) {
             menuItem = new JMenuItem(m.menuName, m.accelerator);
-            menuItem.setAccelerator(m.keyStroke);
             menuItem.setActionCommand(m.menuName);
             // 绑定菜单项的动作命令名称，如果所有菜单项使用同一个监听器
             // 可以在监听器回调时过命令名称区别是哪个菜单项触发的动作

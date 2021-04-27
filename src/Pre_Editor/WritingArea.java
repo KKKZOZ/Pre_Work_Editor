@@ -11,6 +11,8 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -19,13 +21,13 @@ import java.io.IOException;
  */
 public class WritingArea {
 
+    //Field
+    private final Pre_Editor editor;
+    private final CurrentLineInfo currentLineInfo;
     public JPanel writingArea;
     public RSyntaxTextArea textArea;
     public Gutter gutter;
-    //Field
-    private final Pre_Editor editor;
     private RTextScrollPane textScrollPane;
-    private final CurrentLineInfo currentLineInfo;
     private String fileDir;
 
 
@@ -61,6 +63,36 @@ public class WritingArea {
         textArea.setSelectionColor(new Color(50, 50, 255));
         changeStyle();
         extendTextArea();
+        addKeyShortCut();
+    }
+
+
+    private void addKeyShortCut() {
+        textArea.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                char keyChar = e.getKeyChar();
+                if (keyChar == KeyEvent.VK_N && e.isControlDown()) {
+                    editor.actionExeManager.getActionExe(1).exe();
+                }
+                if (keyChar == KeyEvent.VK_ENTER && e.isControlDown() &&!e.isAltDown()) {
+                    editor.actions.createNewLineBeneath();
+                }
+                if (keyChar == KeyEvent.VK_ENTER && e.isControlDown() && e.isAltDown()) {
+                    editor.actions.createNewLineAbove();
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
     }
 
     private void extendTextArea() {
@@ -74,10 +106,9 @@ public class WritingArea {
             e.printStackTrace();
         }
         textArea.addParser(parser);
+
+
     }
-
-
-
 
 
     private void changeStyle() {
