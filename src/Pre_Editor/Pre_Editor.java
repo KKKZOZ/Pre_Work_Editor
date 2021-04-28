@@ -12,7 +12,6 @@ import java.awt.*;
 public class Pre_Editor {
 
     public JFrame mainframe;
-    public WritingArea writingArea;
     public EditorMenu editorMenu;
     public Tray tray;
     public Settings settings;
@@ -20,8 +19,8 @@ public class Pre_Editor {
     public Actions actions;
     public JPanel mainPanel;
     public Multi_use multiUse;
-    public JTabbedPane tabbedPane;
     public ActionExeManager actionExeManager;
+    public WorkingManager workingManager;
     public SaveToLocal saveToLocal;
 
     /**The main method**/
@@ -36,12 +35,10 @@ public class Pre_Editor {
     public Pre_Editor() {
         this.mainPanel= new JPanel(new BorderLayout());
         this.initializeMainframe();
-        this.tabbedPane = new JTabbedPane();
-        this.tabbedPane.add("Test",new JPanel());
+        this.workingManager = new WorkingManager(this);
         this.multiUse = new Multi_use(this);
         this.editorMenu = new EditorMenu(this);
         this.tray = new Tray(this);
-        this.writingArea = new WritingArea(this);
         this.settings = new Settings(this);
         this.statusBar = new StatusBar(this);
         this.actions = new Actions(this);

@@ -32,26 +32,26 @@ public class MarkdownPreview {
         this.htmlPane.setEditable(false);
 
         markdownPane.add(htmlPane);
-        editor.writingArea.textArea.getDocument().addDocumentListener(new DocumentListener() {
+        editor.workingManager.getCurrentWritingArea().textArea.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                String markdown = editor.writingArea.textArea.getText();
+                String markdown = editor.workingManager.getCurrentWritingArea().textArea.getText();
                 setContent(processor.markdown(markdown));
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                String markdown = editor.writingArea.textArea.getText();
+                String markdown = editor.workingManager.getCurrentWritingArea().textArea.getText();
                 setContent(processor.markdown(markdown));
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                String markdown = editor.writingArea.textArea.getText();
+                String markdown = editor.workingManager.getCurrentWritingArea().textArea.getText();
                 setContent(processor.markdown(markdown));
             }
         });
-        editor.writingArea.writingArea.add(markdownPane, BorderLayout.EAST);
+        editor.workingManager.getCurrentWritingArea().writingArea.add(markdownPane, BorderLayout.EAST);
     }
 
 

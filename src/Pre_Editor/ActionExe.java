@@ -6,7 +6,7 @@ public class ActionExe {
     private int id;
     private int nowPerform;
 
-    public ActionExe(int id, int nowPerform,Pre_Editor editor) {
+    public ActionExe(int id, int nowPerform, Pre_Editor editor) {
         this.editor = editor;
         this.id = id;
         this.nowPerform = nowPerform;

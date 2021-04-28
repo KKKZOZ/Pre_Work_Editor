@@ -14,28 +14,28 @@ public class Calculate {
 //    						2->float
     public Calculate(Pre_Editor editor) {
 
-        String originline = editor.writingArea.getCurrentLineInfo().getLineText();
+        String originline = editor.workingManager.getCurrentWritingArea().getCurrentLineInfo().getLineText();
 
         String validline = "";
         if (originline.charAt(originline.length() - 1) == '=') {
             try {
                 validline = originline.substring(0, originline.length() - 1);
                 opt(validline);
-                int caretPosition = editor.writingArea.getCurrentLineInfo().getCaretPosition();
+                int caretPosition = editor.workingManager.getCurrentWritingArea().getCurrentLineInfo().getCaretPosition();
                 if (choice == 1) {
                     //插入整数
-                    editor.writingArea.textArea.replaceRange(((int) (opt(validline)) + ""),
+                    editor.workingManager.getCurrentWritingArea().textArea.replaceRange(((int) (opt(validline)) + ""),
                             caretPosition, caretPosition);
                 } else if (choice == 2) {
-                    editor.writingArea.textArea.replaceRange(Float.toString(opt(validline)),
+                    editor.workingManager.getCurrentWritingArea().textArea.replaceRange(Float.toString(opt(validline)),
                             caretPosition, caretPosition);
                 } else if (!isint(validline))
                 //auto
                 {
-                    editor.writingArea.textArea.replaceRange(Float.toString(opt(validline)),
+                    editor.workingManager.getCurrentWritingArea().textArea.replaceRange(Float.toString(opt(validline)),
                             caretPosition, caretPosition);
                 } else {
-                    editor.writingArea.textArea.replaceRange(((int) (opt(validline)) + ""),
+                    editor.workingManager.getCurrentWritingArea().textArea.replaceRange(((int) (opt(validline)) + ""),
                             caretPosition, caretPosition);
                 }
             } catch (Exception e) {

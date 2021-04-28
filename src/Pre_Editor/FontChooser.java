@@ -28,7 +28,7 @@ public class FontChooser {
     //Constructor
     public FontChooser(Pre_Editor editor) {
         this.editor = editor;
-        this.textArea = editor.writingArea.textArea;
+        this.textArea = editor.workingManager.getCurrentWritingArea().textArea;
         //获得当前字体情况
         font = this.textArea.getFont();
 
@@ -126,7 +126,6 @@ public class FontChooser {
             @Override
             public void actionPerformed(ActionEvent e) {
                 textArea.setFont(getSelectedFont());
-                //TODO TextArea.lineNumberBar.setFont(textArea.getFont());
                 editor.settings.settingDialog.dispose();
             }
         });

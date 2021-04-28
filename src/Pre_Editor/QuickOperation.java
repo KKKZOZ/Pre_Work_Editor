@@ -68,7 +68,7 @@ public class QuickOperation {
                 if ("closed".equals(name) && value.equals(Boolean.TRUE))// 窗口被关闭
                 {
                     System.out.println("窗口被关闭");
-                    mainframe.setContentPane(editor.writingArea.writingArea);
+                    mainframe.setContentPane(editor.mainPanel);
                 }
             }
         });

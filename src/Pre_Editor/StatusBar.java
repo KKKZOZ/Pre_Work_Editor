@@ -18,7 +18,7 @@ public class StatusBar {
     public String time;
 
     public StatusBar(Pre_Editor editor) {
-        JTextArea textArea = editor.writingArea.textArea;
+        JTextArea textArea = editor.workingManager.getCurrentWritingArea().textArea;
         TimeFrame timeFrame = new TimeFrame();
         BottomLabel label = new BottomLabel(editor, textArea);
         textField = new JTextField();
@@ -46,8 +46,8 @@ public class StatusBar {
         public BottomLabel(Pre_Editor editor, JTextArea textArea) {
 
             label.setText("column "
-                    + editor.writingArea.getCurrentLineInfo().getColumn() + "      row "
-                    + editor.writingArea.getCurrentLineInfo().getRow() + "     "
+                    + editor.workingManager.getCurrentWritingArea().getCurrentLineInfo().getColumn() + "      row "
+                    + editor.workingManager.getCurrentWritingArea().getCurrentLineInfo().getRow() + "     "
                     + textArea.getText().length() + " all    ");
 
             textArea.addCaretListener(new CaretListener() {
@@ -57,8 +57,8 @@ public class StatusBar {
 
                     new CurrentLineInfo(textArea);
                     label.setText("column "
-                            + editor.writingArea.getCurrentLineInfo().getColumn() + "      row "
-                            + editor.writingArea.getCurrentLineInfo().getRow() + "     "
+                            + editor.workingManager.getCurrentWritingArea().getCurrentLineInfo().getColumn() + "      row "
+                            + editor.workingManager.getCurrentWritingArea().getCurrentLineInfo().getRow() + "     "
                             + textArea.getText().length() + " all    ");
                 }
             });

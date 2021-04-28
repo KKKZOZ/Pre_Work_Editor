@@ -29,9 +29,7 @@ public class WritingArea {
     public Gutter gutter;
     private RTextScrollPane textScrollPane;
     private String fileDir;
-
-
-
+    private boolean markdownOpen = false;
 
 
     //Constructor
@@ -69,40 +67,6 @@ public class WritingArea {
         addKeyShortCut();
     }
 
-
-    private void addKeyShortCut() {
-        textArea.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                char keyChar = e.getKeyChar();
-//                System.out.println((int)keyChar);
-//                if (Character.isLetter(keyChar) && Character.isLowerCase(keyChar)) {
-//                    System.out.println("???");
-//                    keyChar = Character.toUpperCase(keyChar);
-//                }
-                System.out.println((int)keyChar);
-                if (keyChar == ActionExeManager.KEY_EVENT_P && e.isControlDown()) {
-                    editor.actionExeManager.getActionExe(1).exe();
-                }
-                if (keyChar == KeyEvent.VK_ENTER && e.isControlDown() &&!e.isAltDown()) {
-                    editor.actions.createNewLineBeneath();
-                }
-                if (keyChar == KeyEvent.VK_ENTER && e.isControlDown() && e.isAltDown()) {
-                    editor.actions.createNewLineAbove();
-                }
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
-        });
-    }
 
     private void extendTextArea() {
         LanguageSupportFactory.get().register(textArea);
@@ -170,13 +134,96 @@ public class WritingArea {
 
 
 //        editor.mainframe.setContentPane(writingArea);
-        editor.mainPanel.add(writingArea, BorderLayout.CENTER);
+//        editor.mainPanel.add(writingArea, BorderLayout.CENTER);
         editor.mainframe.setVisible(true);
 
 
         new CurrentLineInfo(textArea);
 //        writingArea.setDividerLocation(0.02);
     }//End of createWritingArea
+
+    private void addKeyShortCut() {
+        textArea.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                char keyChar = e.getKeyChar();
+//                System.out.println((int)keyChar);
+//                if (Character.isLetter(keyChar) && Character.isLowerCase(keyChar)) {
+//                    System.out.println("???");
+//                    keyChar = Character.toUpperCase(keyChar);
+//                }
+
+                if (keyChar == ActionExeManager.KEY_EVENT_P && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(1).exe();
+                }
+                if (keyChar == ActionExeManager.KEY_EVENT_O && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(2).exe();
+                }
+                if (keyChar == ActionExeManager.KEY_EVENT_S && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(3).exe();
+                }
+                if (keyChar == ActionExeManager.KEY_EVENT_Q && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(4).exe();
+                }
+                if (keyChar == ActionExeManager.KEY_EVENT_W && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(5).exe();
+                }
+                if (keyChar == ActionExeManager.KEY_EVENT_E && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(6).exe();
+                }
+
+                if (keyChar == ActionExeManager.KEY_EVENT_R && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(7).exe();
+                }
+                if (keyChar == ActionExeManager.KEY_EVENT_T && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(8).exe();
+                }
+                if (keyChar == ActionExeManager.KEY_EVENT_U && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(9).exe();
+                }
+                if (keyChar == ActionExeManager.KEY_EVENT_I && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(10).exe();
+                }
+                if (keyChar == ActionExeManager.KEY_EVENT_L && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(11).exe();
+                }
+                if (keyChar == ActionExeManager.KEY_EVENT_K && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(12).exe();
+                }
+                if (keyChar == ActionExeManager.KEY_EVENT_J && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(13).exe();
+                }
+                if (keyChar == ActionExeManager.KEY_EVENT_H && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(14).exe();
+                }
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
+    }
 
     public String getFileDir() {
         return fileDir;
@@ -196,5 +243,13 @@ public class WritingArea {
 
     public CurrentLineInfo getCurrentLineInfo() {
         return currentLineInfo;
+    }
+
+    public boolean isMarkdownIsOpen() {
+        return markdownOpen;
+    }
+
+    public void setMarkdownIsOpen(boolean isMarkdownOpen) {
+        this.markdownOpen = isMarkdownOpen;
     }
 }

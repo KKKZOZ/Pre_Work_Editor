@@ -15,7 +15,6 @@ public class EditorMenu {
     //Field
     private Pre_Editor editor;
     private MenuActionListener menuActionListener = new MenuActionListener();
-    private boolean markdownIsOpen = false;
     private MarkdownPreview markdownPreview;
 
     //Constructor
@@ -37,6 +36,7 @@ public class EditorMenu {
         ArrayList<MenuDetail> file = new ArrayList<MenuDetail>();
 
         file.add(new MenuDetail("New", 'n', false));
+        file.add(new MenuDetail("Close",'c' , true));
         file.add(new MenuDetail("Open", 'o', false));
         file.add(new MenuDetail("Save", 's', false));
         file.add(new MenuDetail("Quick Operation", 'q', false));
@@ -83,8 +83,11 @@ public class EditorMenu {
         public void actionPerformed(ActionEvent e) {
             if ("New".equals(e.getActionCommand())) {
                 System.out.println("New");
+                editor.workingManager.newTab("Untitled");
 //                new QuickCommand(editor);
-
+            }
+            if ("Close".equals(e.getActionCommand())) {
+                editor.workingManager.closeSelectedTab(editor.workingManager.getSelectedIndex());
             }
             if ("Open".equals(e.getActionCommand())) {
                 System.out.println("Open");
@@ -110,14 +113,15 @@ public class EditorMenu {
                 new QuickCommand(editor);
             }
             if ("Markdown Preview".equals(e.getActionCommand())) {
-                if (!markdownIsOpen) {
+                if (!editor.workingManager.getCurrentWritingArea().isMarkdownIsOpen()) {
                     markdownPreview = new MarkdownPreview(editor);
-                    markdownIsOpen = true;
+                    editor.workingManager.getCurrentWritingArea().setMarkdownIsOpen(true);
                     return;
                 }
-                if (markdownIsOpen) {
-                    editor.writingArea.writingArea.remove(markdownPreview.markdownPane);
-                    markdownIsOpen = false;
+                //TODO 可能会出现关闭失败的情况
+                if (editor.workingManager.getCurrentWritingArea().isMarkdownIsOpen()) {
+                    editor.workingManager.getCurrentWritingArea().writingArea.remove(markdownPreview.markdownPane);
+                    editor.workingManager.getCurrentWritingArea().setMarkdownIsOpen(false);
                     return;
                 }
 

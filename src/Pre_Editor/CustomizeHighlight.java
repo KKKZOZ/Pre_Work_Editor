@@ -2,8 +2,6 @@ package Pre_Editor;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
-import org.fife.ui.rsyntaxtextarea.SyntaxScheme;
-import org.fife.ui.rsyntaxtextarea.Token;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,8 +41,8 @@ public class CustomizeHighlight {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                     System.out.println(comboBox1.getSelectedIndex());
                     if (comboBox1.getSelectedIndex() == 0) {
-                        SyntaxScheme scheme = editor.writingArea.textArea.getSyntaxScheme();
-                        scheme.getStyle(Token.RESERVED_WORD).foreground = Color.RED;
+//                        SyntaxScheme scheme = editor.writingArea.textArea.getSyntaxScheme();
+//                        scheme.getStyle(Token.RESERVED_WORD).foreground = Color.RED;
                     }
                 }
             }
