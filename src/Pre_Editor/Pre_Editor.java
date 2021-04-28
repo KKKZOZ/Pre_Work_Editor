@@ -34,8 +34,8 @@ public class Pre_Editor {
 
     /**Constructor**/
     public Pre_Editor() {
-        this.initializeMainframe();
         this.mainPanel= new JPanel(new BorderLayout());
+        this.initializeMainframe();
         this.tabbedPane = new JTabbedPane();
         this.tabbedPane.add("Test",new JPanel());
         this.multiUse = new Multi_use(this);

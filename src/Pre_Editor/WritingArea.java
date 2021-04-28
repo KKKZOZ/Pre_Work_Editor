@@ -31,6 +31,9 @@ public class WritingArea {
     private String fileDir;
 
 
+
+
+
     //Constructor
     public WritingArea(Pre_Editor editor) {
         this.editor = editor;
@@ -77,7 +80,13 @@ public class WritingArea {
             @Override
             public void keyPressed(KeyEvent e) {
                 char keyChar = e.getKeyChar();
-                if (keyChar == KeyEvent.VK_N && e.isControlDown()) {
+//                System.out.println((int)keyChar);
+//                if (Character.isLetter(keyChar) && Character.isLowerCase(keyChar)) {
+//                    System.out.println("???");
+//                    keyChar = Character.toUpperCase(keyChar);
+//                }
+                System.out.println((int)keyChar);
+                if (keyChar == ActionExeManager.KEY_EVENT_P && e.isControlDown()) {
                     editor.actionExeManager.getActionExe(1).exe();
                 }
                 if (keyChar == KeyEvent.VK_ENTER && e.isControlDown() &&!e.isAltDown()) {

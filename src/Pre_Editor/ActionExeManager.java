@@ -19,6 +19,10 @@ public class ActionExeManager {
     public static final int SETTINGS = 10;
     public static final int ABOUT = 11;
 
+
+    public static final int KEY_EVENT_P = 16;
+
+
     private Pre_Editor editor;
     private ActionExe actionExe1;
     private ActionExe actionExe2;
