@@ -19,6 +19,7 @@ public class trycmd {
             outputStream.write(action.getBytes(StandardCharsets.UTF_8));
             outputStream.flush();
             print(stdout);
+            print(stderr);
         }
     }
 

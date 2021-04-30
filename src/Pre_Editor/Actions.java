@@ -107,20 +107,28 @@ public class Actions {
         	textAction.delete();
         }
       
-        if (action == ActionExeManager.UPCHANGE) {
+        if (action == ActionExeManager.UP_CHANGE) {
             this.textAction.upchange();
         }
-        if (action == ActionExeManager.DOWNCHANGE) {
+        if (action == ActionExeManager.DOWN_CHANGE) {
             this.textAction.downchange();
         }
         if (action == ActionExeManager.CLOSE_TAB) {
-            //TODO
+            editor.workingManager.closeSelectedTab(editor.workingManager.getSelectedIndex());
         }
         if (action == ActionExeManager.PAGE_UP_TAB) {
-            //TODO
+            if (editor.workingManager.getSelectedIndex() - 1 < 0) {
+                editor.workingManager.setSelectedIndex(editor.workingManager.getTabCount()-1);
+                return;
+            }
+            editor.workingManager.setSelectedIndex(editor.workingManager.getSelectedIndex()-1);
         }
         if (action == ActionExeManager.PAGE_DOWN_TAB) {
-            //TODO
+            if (editor.workingManager.getSelectedIndex() + 1 >= editor.workingManager.getTabCount()) {
+                editor.workingManager.setSelectedIndex(0);
+                return;
+            }
+            editor.workingManager.setSelectedIndex(editor.workingManager.getSelectedIndex()+1);
         }
         
         

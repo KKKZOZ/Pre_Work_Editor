@@ -62,11 +62,143 @@ public class WritingArea {
         textArea.setBackground(Color.DARK_GRAY);
         textArea.setForeground(Color.LIGHT_GRAY);
         textArea.setSelectionColor(new Color(50, 50, 255));
+        addKeyShortCut();
         changeStyle();
         extendTextArea();
-        addKeyShortCut();
     }
 
+    private void addKeyShortCut() {
+        textArea.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                char keyChar = e.getKeyChar();
+//                System.out.println((int)keyChar);
+//                if (Character.isLetter(keyChar) && Character.isLowerCase(keyChar)) {
+//                    System.out.println("???");
+//                    keyChar = Character.toUpperCase(keyChar);
+//                }
+
+//                System.out.println((int)keyChar);
+                int keyCode = e.getKeyCode();
+//                System.out.println((int)keyChar);
+
+                //When Ctrl + N is pressed
+                if (keyChar == ActionExeManager.KEY_EVENT_N && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(1).exe();
+                }
+
+                //When Ctrl + O is pressed
+                if (keyChar == ActionExeManager.KEY_EVENT_O && e.isControlDown()) {
+
+
+                    editor.actionExeManager.getActionExe(2).exe();
+                }
+
+                //When Ctrl + S is pressed
+                if (keyChar == ActionExeManager.KEY_EVENT_S && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(3).exe();
+                }
+
+                //When Ctrl + Q is pressed
+                if (keyChar == ActionExeManager.KEY_EVENT_Q && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(4).exe();
+                }
+
+                //When Ctrl + W is pressed
+                if (keyChar == ActionExeManager.KEY_EVENT_W && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(5).exe();
+                }
+
+                //When Ctrl + E is pressed
+                if (keyChar == ActionExeManager.KEY_EVENT_E && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(6).exe();
+                }
+
+                //When Ctrl + R is pressed
+                if (keyChar == ActionExeManager.KEY_EVENT_R && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(7).exe();
+                }
+
+                //When Ctrl + T is pressed
+                if (keyChar == ActionExeManager.KEY_EVENT_T && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(8).exe();
+                }
+
+                //When Ctrl + U is pressed
+                if (keyChar == ActionExeManager.KEY_EVENT_U && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(9).exe();
+                }
+
+                //When Ctrl + I is pressed
+                if (keyChar == ActionExeManager.KEY_EVENT_I && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(10).exe();
+                }
+
+                //When Ctrl + L is pressed
+                if (keyChar == ActionExeManager.KEY_EVENT_L && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(11).exe();
+                }
+
+                //When Ctrl + K is pressed
+                if (keyChar == ActionExeManager.KEY_EVENT_K && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(12).exe();
+                }
+
+                //When Ctrl + J is pressed
+                if (keyChar == ActionExeManager.KEY_EVENT_J && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(13).exe();
+                }
+
+                //When Ctrl + H is pressed
+                if (keyChar == ActionExeManager.KEY_EVENT_H && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(14).exe();
+                }
+
+                //When Ctrl + Shift + Left is pressed
+                if (keyCode == ActionExeManager.KEY_EVENT_LEFT && e.isControlDown() && e.isShiftDown()) {
+
+                    editor.actionExeManager.getActionExe(15).exe();
+                }
+
+                //When Ctrl + Shift + Right is pressed
+                if (keyCode == ActionExeManager.KEY_EVENT_RIGHT && e.isControlDown() && e.isShiftDown()) {
+
+                    editor.actionExeManager.getActionExe(16).exe();
+                }
+
+                ////When Ctrl + P is pressed
+                if (keyChar == ActionExeManager.KEY_EVENT_P && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(17).exe();
+                }
+
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
+    }
 
     private void extendTextArea() {
         LanguageSupportFactory.get().register(textArea);
@@ -142,104 +274,6 @@ public class WritingArea {
 //        writingArea.setDividerLocation(0.02);
     }//End of createWritingArea
 
-    private void addKeyShortCut() {
-        textArea.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                char keyChar = e.getKeyChar();
-//                System.out.println((int)keyChar);
-//                if (Character.isLetter(keyChar) && Character.isLowerCase(keyChar)) {
-//                    System.out.println("???");
-//                    keyChar = Character.toUpperCase(keyChar);
-//                }
-
-//                System.out.println((int)keyChar);
-                if (keyChar == 40 && e.isShiftDown()) {
-
-                }
-                if (keyChar == ActionExeManager.KEY_EVENT_N && e.isControlDown()) {
-
-                    editor.actionExeManager.getActionExe(1).exe();
-                }
-                if (keyChar == ActionExeManager.KEY_EVENT_O && e.isControlDown()) {
-
-                    editor.actionExeManager.getActionExe(2).exe();
-                }
-                if (keyChar == ActionExeManager.KEY_EVENT_S && e.isControlDown()) {
-
-                    editor.actionExeManager.getActionExe(3).exe();
-                }
-                if (keyChar == ActionExeManager.KEY_EVENT_Q && e.isControlDown()) {
-
-                    editor.actionExeManager.getActionExe(4).exe();
-                }
-                if (keyChar == ActionExeManager.KEY_EVENT_W && e.isControlDown()) {
-
-                    editor.actionExeManager.getActionExe(5).exe();
-                }
-                if (keyChar == ActionExeManager.KEY_EVENT_E && e.isControlDown()) {
-
-                    editor.actionExeManager.getActionExe(6).exe();
-                }
-
-                if (keyChar == ActionExeManager.KEY_EVENT_R && e.isControlDown()) {
-
-                    editor.actionExeManager.getActionExe(7).exe();
-                }
-                if (keyChar == ActionExeManager.KEY_EVENT_T && e.isControlDown()) {
-
-                    editor.actionExeManager.getActionExe(8).exe();
-                }
-                if (keyChar == ActionExeManager.KEY_EVENT_U && e.isControlDown()) {
-
-                    editor.actionExeManager.getActionExe(9).exe();
-                }
-                if (keyChar == ActionExeManager.KEY_EVENT_I && e.isControlDown()) {
-
-                    editor.actionExeManager.getActionExe(10).exe();
-                }
-                if (keyChar == ActionExeManager.KEY_EVENT_L && e.isControlDown()) {
-
-                    editor.actionExeManager.getActionExe(11).exe();
-                }
-                if (keyChar == ActionExeManager.KEY_EVENT_K && e.isControlDown()) {
-
-                    editor.actionExeManager.getActionExe(12).exe();
-                }
-                if (keyChar == ActionExeManager.KEY_EVENT_J && e.isControlDown()) {
-
-                    editor.actionExeManager.getActionExe(13).exe();
-                }
-                if (keyChar == ActionExeManager.KEY_EVENT_H && e.isControlDown()) {
-
-                    editor.actionExeManager.getActionExe(14).exe();
-                }
-                if (keyChar == ActionExeManager.KEY_EVENT_G && e.isControlDown()) {
-
-                    editor.actionExeManager.getActionExe(15).exe();
-                }
-                if (keyChar == ActionExeManager.KEY_EVENT_M && e.isControlDown()) {
-
-                    editor.actionExeManager.getActionExe(16).exe();
-                }
-                if (keyChar == ActionExeManager.KEY_EVENT_P && e.isControlDown()) {
-
-                    editor.actionExeManager.getActionExe(17).exe();
-                }
-               
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
-        });
-    }
 
     public String getFileDir() {
         return fileDir;

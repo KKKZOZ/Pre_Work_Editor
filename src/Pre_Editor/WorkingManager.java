@@ -43,8 +43,20 @@ public class WorkingManager {
     public int getSelectedIndex() {
         return workingTabbedPane.getSelectedIndex();
     }
+
+    public void setSelectedIndex(int index) {
+        workingTabbedPane.setSelectedIndex(index);
+    }
+
+    public int getTabCount() {
+        return tabCount;
+    }
     public WritingArea getCurrentWritingArea() {
         int index = workingTabbedPane.getSelectedIndex();
         return writingAreaList.get(index);
+    }
+
+    public ArrayList<WritingArea> getWritingAreaList() {
+        return writingAreaList;
     }
 }

@@ -217,16 +217,16 @@ public class CurrentLineInfo {
         this.rowCount = rowCount;
     }
 
-    public int[] getTail() {
-        return tail;
+    public int getTail(int lineNumber) {
+        return tail[lineNumber - 1];
     }
 
     public void setTail(int[] tail) {
         this.tail = tail;
     }
 
-    public int[] getHead() {
-        return head;
+    public int getHead(int lineNumber) {
+        return head[lineNumber - 1];
     }
 
     public void setHead(int[] head) {

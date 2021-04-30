@@ -4,16 +4,16 @@ public class ActionExe {
 
     private final Pre_Editor editor;
     private final int id;
-    private int nowPerform;
+    private int function;
 
-    public ActionExe(int id, int nowPerform, Pre_Editor editor) {
+    public ActionExe(int id, int function, Pre_Editor editor) {
         this.editor = editor;
         this.id = id;
-        this.nowPerform = nowPerform;
+        this.function = function;
     }
 
     public void exe() {
-        editor.actions.actionPerforming(nowPerform);
+        editor.actions.actionPerforming(function);
     }
 
 
@@ -21,11 +21,11 @@ public class ActionExe {
         return id;
     }
 
-    public int getNowPerform() {
-        return nowPerform;
+    public int getFunction() {
+        return function;
     }
 
-    public void setNowPerform(int nowPerform) {
-        this.nowPerform = nowPerform;
+    public void setFunction(int function) {
+        this.function = function;
     }
 }

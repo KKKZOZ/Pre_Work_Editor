@@ -7,6 +7,7 @@ public class Multi_use {
     private final Pre_Editor editor;
     public JPanel southPanel;
     public JTabbedPane multiPane;
+    public Terminal terminal;
 
 
     public Multi_use(Pre_Editor editor) {
@@ -15,10 +16,13 @@ public class Multi_use {
         editor.mainPanel.add(southPanel, BorderLayout.SOUTH);
         multiPane = new JTabbedPane();
 
-        //Temporary
-        JTextArea temp = new JTextArea("Test");
-        temp.setRows(8);
-        multiPane.addTab("Test", temp);
+        try {
+            terminal = new Terminal();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        terminal.getTextArea().setRows(10);
+        multiPane.addTab("Test", terminal.getMainPanel());
         southPanel.add(multiPane,BorderLayout.CENTER);
     }
 }

@@ -18,8 +18,8 @@ public class ActionExeManager {
     public static final int MARKDOWN_PREVIEW = 9;
     public static final int SETTINGS = 10;
     public static final int ABOUT = 11;
-    public static final int UPCHANGE = 12;
-    public static final int DOWNCHANGE = 13;
+    public static final int UP_CHANGE = 12;
+    public static final int DOWN_CHANGE = 13;
     public static final int CLOSE_TAB = 14;
     public static final int PAGE_UP_TAB = 15;
     public static final int PAGE_DOWN_TAB = 16;
@@ -42,27 +42,31 @@ public class ActionExeManager {
     public static final int KEY_EVENT_G = 7;
     public static final int KEY_EVENT_M = 13;
     public static final int KEY_EVENT_P = 16;
+    public static final int KEY_EVENT_LEFT = 37;
+    public static final int KEY_EVENT_UP = 38;
+    public static final int KEY_EVENT_RIGHT = 39;
+    public static final int KEY_EVENT_DOWN = 40;
 
     private final Pre_Editor editor;
-    private  ActionExe actionExe1;
-    private  ActionExe actionExe2;
-    private  ActionExe actionExe3;
-    private  ActionExe actionExe4;
-    private  ActionExe actionExe5;
-    private  ActionExe actionExe6;
-    private  ActionExe actionExe7;
-    private  ActionExe actionExe8;
-    private  ActionExe actionExe9;
-    private  ActionExe actionExe10;
-    private  ActionExe actionExe11;
-    private  ActionExe actionExe12;
-    private  ActionExe actionExe13;
-    private  ActionExe actionExe14;
-    private  ActionExe actionExe15;
-    private  ActionExe actionExe16;
-    private  ActionExe actionExe17;
-    private  ActionExe actionExe18;
-    private  ArrayList<ActionExe> actionList;
+    private ActionExe actionExe1;
+    private ActionExe actionExe2;
+    private ActionExe actionExe3;
+    private ActionExe actionExe4;
+    private ActionExe actionExe5;
+    private ActionExe actionExe6;
+    private ActionExe actionExe7;
+    private ActionExe actionExe8;
+    private ActionExe actionExe9;
+    private ActionExe actionExe10;
+    private ActionExe actionExe11;
+    private ActionExe actionExe12;
+    private ActionExe actionExe13;
+    private ActionExe actionExe14;
+    private ActionExe actionExe15;
+    private ActionExe actionExe16;
+    private ActionExe actionExe17;
+    private ActionExe actionExe18;
+    private ArrayList<ActionExe> actionList;
 
 
     public ActionExeManager(Pre_Editor editor) {
@@ -86,7 +90,7 @@ public class ActionExeManager {
         actionExe17 = new ActionExe(17, 17, editor);
         actionExe18 = new ActionExe(18, 18, editor);
 
-        actionList = new ArrayList<ActionExe>();
+        actionList = new ArrayList<>();
         actionList.add(actionExe1);
         actionList.add(actionExe2);
         actionList.add(actionExe3);
@@ -119,18 +123,9 @@ public class ActionExeManager {
     public void setFunction(int index, int function) {
         for (ActionExe exe : actionList) {
             if (index == exe.getId()) {
-                exe.setNowPerform(function);
+                exe.setFunction(function);
                 return;
             }
-        }
-    }
-
-
-    public class ActionExeDetail {
-        private int actionNumber;
-
-        public void exe(int actionNumber) {
-
         }
     }
 
