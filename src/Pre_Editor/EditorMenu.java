@@ -13,8 +13,8 @@ public class EditorMenu {
     public JMenu menu = null;
     public JMenuItem menuItem = null;
     //Field
-    private Pre_Editor editor;
-    private MenuActionListener menuActionListener = new MenuActionListener();
+    private final Pre_Editor editor;
+    private final MenuActionListener menuActionListener = new MenuActionListener();
     private MarkdownPreview markdownPreview;
 
     //Constructor

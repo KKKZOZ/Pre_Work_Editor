@@ -14,10 +14,10 @@ import java.awt.*;
 public class MarkdownPreview {
     //Field
     public JPanel markdownPane;
-    private Pre_Editor editor;
-    private JTextPane htmlPane;
-    private HTMLEditorKit kit;
-    private MarkdownProcessor processor;
+    private final Pre_Editor editor;
+    private final JTextPane htmlPane;
+    private final HTMLEditorKit kit;
+    private final MarkdownProcessor processor;
 
 
     public MarkdownPreview(Pre_Editor editor) {

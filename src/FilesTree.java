@@ -15,9 +15,9 @@ public class FilesTree extends JFrame {
 
     private static final long serialVersionUID = -2055459510450224221L;
 
-    private JPanel contentPane;
+    private final JPanel contentPane;
 
-    private JTree tree;
+    private final JTree tree;
 
     /**
 
@@ -105,13 +105,7 @@ public class FilesTree extends JFrame {
 
                 public boolean accept(File pathname) {// 过滤掉隐藏类型文件
 
-                    if (pathname.isHidden()) {
-                        return false;
-
-                    } else {
-                        return true;
-
-                    }
+                    return !pathname.isHidden();
 
                 }
 

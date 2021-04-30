@@ -14,7 +14,7 @@ public class ComponentResizer extends MouseAdapter {
     private final static Dimension MAXIMUM_SIZE =
             new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE);
 
-    private static Map<Integer, Integer> cursors = new HashMap<Integer, Integer>();
+    private static final Map<Integer, Integer> cursors = new HashMap<Integer, Integer>();
 
     {
         cursors.put(1, Cursor.N_RESIZE_CURSOR);

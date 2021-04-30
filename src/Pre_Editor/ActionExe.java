@@ -2,8 +2,8 @@ package Pre_Editor;
 
 public class ActionExe {
 
-    private Pre_Editor editor;
-    private int id;
+    private final Pre_Editor editor;
+    private final int id;
     private int nowPerform;
 
     public ActionExe(int id, int nowPerform, Pre_Editor editor) {

@@ -19,7 +19,7 @@ public class SyntaxSchemeDemo extends JFrame implements ActionListener {
 
     private static final long serialVersionUID = 1L;
 
-    private RSyntaxTextArea textArea;
+    private final RSyntaxTextArea textArea;
 
     private static final String text = "public class ExampleSource {\n\n"
             + "   // Check out the crazy modified styles!\n"

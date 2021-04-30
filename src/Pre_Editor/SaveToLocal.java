@@ -9,10 +9,10 @@ import java.io.IOException;
  */
 public class SaveToLocal {
 
-    private Pre_Editor editor;
-    private ActionExeManager actionExeManager;
-    private String fileDir;
-    private StringBuilder stringBuilder;
+    private final Pre_Editor editor;
+    private final ActionExeManager actionExeManager;
+    private final String fileDir;
+    private final StringBuilder stringBuilder;
 
     public SaveToLocal(Pre_Editor editor) {
         this.editor = editor;

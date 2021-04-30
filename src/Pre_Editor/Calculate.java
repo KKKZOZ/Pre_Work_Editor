@@ -97,16 +97,16 @@ public class Calculate {
         }
 
         if (a1 != -1) {
-            return opt(s.substring(0, a1)) + opt(s.substring(a1 + 1, s.length()));
+            return opt(s.substring(0, a1)) + opt(s.substring(a1 + 1));
         }
         if (a2 != -1) {
-            return opt(s.substring(0, a2)) - opt(s.substring(a2 + 1, s.length()));
+            return opt(s.substring(0, a2)) - opt(s.substring(a2 + 1));
         }
         if (a3 != -1) {
-            return opt(s.substring(0, a3)) * opt(s.substring(a3 + 1, s.length()));
+            return opt(s.substring(0, a3)) * opt(s.substring(a3 + 1));
         }
         if (a4 != -1) {
-            return opt(s.substring(0, a4)) / opt(s.substring(a4 + 1, s.length()));
+            return opt(s.substring(0, a4)) / opt(s.substring(a4 + 1));
         }
         return Integer.parseInt(s.trim());
     }

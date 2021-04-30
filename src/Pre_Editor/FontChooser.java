@@ -11,10 +11,10 @@ public class FontChooser {
     private JCheckBox italic;
     public JPanel parentPanel;
 
-    private JTextArea textArea;
-    private JPanel contentPanel = new JPanel(new BorderLayout());
-    private Font font;
-    private Pre_Editor editor;
+    private final JTextArea textArea;
+    private final JPanel contentPanel = new JPanel(new BorderLayout());
+    private final Font font;
+    private final Pre_Editor editor;
 
 
     //Initialize two lists

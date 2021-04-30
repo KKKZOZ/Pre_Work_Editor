@@ -9,10 +9,10 @@ import java.util.ArrayList;
  */
 public class WorkingManager {
 
-    private Pre_Editor editor;
-    private JTabbedPane workingTabbedPane;
+    private final Pre_Editor editor;
+    private final JTabbedPane workingTabbedPane;
     private int tabCount;
-    private ArrayList<WritingArea> writingAreaList;
+    private final ArrayList<WritingArea> writingAreaList;
 
     //TODO 所有WrtingArea里可以用户自定义的属性都应该在这里
     //在newTab()里赋值给temp，保证新开的tab和旧tab的同步性

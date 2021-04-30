@@ -11,7 +11,7 @@ public class Actions {
     public static final int SAVE_FILE = 1;
     //Field
     private final Pre_Editor editor;
-    private TextAction textAction;
+    private final TextAction textAction;
 
     //Constructor
     public Actions(Pre_Editor editor) {
@@ -70,7 +70,7 @@ public class Actions {
 
     public void actionPerforming(int action) {
     	
-        if (action == ActionExeManager.NEW) {
+        if (action == ActionExeManager.NEW_TAB) {
             editor.workingManager.newTab("Untitled");
         }
         if (action == ActionExeManager.OPEN_FILE) {
@@ -80,30 +80,31 @@ public class Actions {
             this.saveFile();
         }
         if (action == ActionExeManager.CREATE_LINE_BENEATH) {
-            this.textAction.createNewLineBeneath();
+            editor.workingManager.getCurrentWritingArea().getCurrentLineInfo().createNewLineBeneath();
         }
         if (action == ActionExeManager.CREATE_LINE_ABOVE) {
-            this.textAction.createNewLineAbove();
+        	editor.workingManager.getCurrentWritingArea().getCurrentLineInfo().createNewLineAbove();
         }
         if (action == ActionExeManager.CALCULATE) {
            
-             Calculate cal=new Calculate(editor);
+             new Calculate(editor);
         }
         if (action == ActionExeManager.CMD) {
-
-        	
+//TODO
+        	editor.workingManager.getCurrentWritingArea().getCurrentLineInfo().deleteOffset(2);
         }
         if (action == ActionExeManager.QUICK_OPERATION) {
-            //TODO
+            new QuickOperation(editor);
         }
         if (action == ActionExeManager.MARKDOWN_PREVIEW) {
-            //TODO
+            new MarkdownPreview(editor);
         }
         if (action == ActionExeManager.SETTINGS) {
-            //TODO
+            new Settings(editor);
         }
         if (action == ActionExeManager.ABOUT) {
             //TODO
+        	textAction.delete();
         }
       
         if (action == ActionExeManager.UPCHANGE) {
@@ -112,128 +113,71 @@ public class Actions {
         if (action == ActionExeManager.DOWNCHANGE) {
             this.textAction.downchange();
         }
+        if (action == ActionExeManager.CLOSE_TAB) {
+            //TODO
+        }
+        if (action == ActionExeManager.PAGE_UP_TAB) {
+            //TODO
+        }
+        if (action == ActionExeManager.PAGE_DOWN_TAB) {
+            //TODO
+        }
+        
+        
         
     }
     public class TextAction {
 
-    	private CurrentLineInfo currentLineInfo;
+    	private final CurrentLineInfo currentLineInfo;
 
 		public TextAction(Pre_Editor editor) {
 			currentLineInfo=editor.workingManager.getCurrentWritingArea().getCurrentLineInfo();
 		}
     	
-    	public void delete() {
-            int start=currentLineInfo.getCaretPosition()-
-                    currentLineInfo.getColumn();
-            int end=currentLineInfo.getCaretPosition()+currentLineInfo.getLineText().length()
-                    -currentLineInfo.getColumn();
-            String text=editor.workingManager.getCurrentWritingArea().textArea.getText();
-            int row=currentLineInfo.getRow();
-            String firsttext=text.substring(0, start);
-            String lasttext=text.substring(end, text.length());
-            if(currentLineInfo.getRow()!=currentLineInfo.getRowCount()) {
-                editor.workingManager.getCurrentWritingArea().textArea.setText(firsttext+lasttext);
-            } else {
-                String newString=firsttext+lasttext;
-                editor.workingManager.getCurrentWritingArea().textArea.setText(newString.substring(0, newString.length()-1));
-            }
-            if(row!=1) {
-                editor.workingManager.getCurrentWritingArea().textArea.setCaretPosition(start-1);
-            } else {
-                editor.workingManager.getCurrentWritingArea().textArea.setCaretPosition(0);
-            }
+    	public  void delete() {
+    		editor.workingManager.getCurrentWritingArea().getCurrentLineInfo().delete();
         }
         public void upchange() {
-            try {
-            	if(currentLineInfo.getRow()==1) {
-                    return;
-                }
-                int start=currentLineInfo.getCaretPosition()-
-                        currentLineInfo.getColumn();
-                int end=currentLineInfo.getCaretPosition()+currentLineInfo.getLineText().length()
-                        -currentLineInfo.getColumn();
-                String oringinString=editor.workingManager.getCurrentWritingArea().textArea.getText();
-                boolean islast=currentLineInfo.getRow()==currentLineInfo.getRowCount();
-                int upline =start- currentLineInfo.getSelectedLine(currentLineInfo.getRow()-1).length();
-                String text1=currentLineInfo.getLineText();
-                String text2=currentLineInfo.getSelectedLine(currentLineInfo.getRow()-1);
-                String first= oringinString.substring(0, upline);
-                String last=oringinString.substring(end, oringinString.length());
-                if(!islast) {
-                    editor.workingManager.getCurrentWritingArea().textArea.setText(first+text1+text2+last);
-                    editor.workingManager.getCurrentWritingArea().textArea.setCaretPosition(upline+text1.length()-1);
-                }
-                else {
-                    text2=text2.substring(0, text2.length()-1);
-                    editor.workingManager.getCurrentWritingArea().textArea.setText(first+text1+"\n"+text2);
-                    editor.workingManager.getCurrentWritingArea().textArea.setCaretPosition(upline+text1.length());
-                }
+        	if(currentLineInfo.getRow()==1) {
+                return;
             }
-            catch (Exception e1) {
-                e1.printStackTrace();
-            }
+        	int row=currentLineInfo.getRow();
+        	String text1=currentLineInfo.getSelectedLine(row);
+            String text2=currentLineInfo.getSelectedLine(row-1);
+            currentLineInfo.setLineText(row, text2.replace("\n", ""));
+            currentLineInfo.setLineText(row-1, text1.replace("\n", ""));
+            currentLineInfo.reset();
+             editor.workingManager.getCurrentWritingArea().textArea.setCaretPosition(currentLineInfo.tail[row-2]); 
+
         }
         public void downchange() {
-            try {
+          
             	if(currentLineInfo.getRow()==currentLineInfo.getRowCount()) {
                     return;
                 }
-                int start=currentLineInfo.getCaretPosition()-
-                        currentLineInfo.getColumn();
-                int end=currentLineInfo.getCaretPosition()+currentLineInfo.getLineText().length()
-                        -currentLineInfo.getColumn();
-                String oringinString=editor.workingManager.getCurrentWritingArea().textArea.getText();
-                boolean islast2=currentLineInfo.getRow()==currentLineInfo.getRowCount()-1;
-                int downline =end+ currentLineInfo.getSelectedLine(currentLineInfo.getRow()+1).length();
+                
+                
+              
+            	int row=currentLineInfo.getRow();
                 String text1=currentLineInfo.getLineText();//current           
                 String text2=currentLineInfo.getSelectedLine(currentLineInfo.getRow()+1);
-                //downline
-                String first= oringinString.substring(0, start);
-               
-                if (!islast2) {
-                String last=oringinString.substring(downline, oringinString.length()-1);
-                    editor.workingManager.getCurrentWritingArea().textArea.setText(first+text2+text1+"\n"+last);
-                    editor.workingManager.getCurrentWritingArea().textArea.setCaretPosition(downline-1);
-                }
+          
+                System.out.println(text2.replace("\n", "")+text1.replace("\n", ""));
+                if (row+1==currentLineInfo.getRowCount()) {
+                	currentLineInfo.setLineText(row+1, text1.replace("\n", ""));
+				}
                 else {
-                    text1.substring(0, text1.length()-1);
-                	System.out.println(first+text2+text1);
-                    editor.workingManager.getCurrentWritingArea().textArea.setText(first+text2+"\n"+text1);
-                    editor.workingManager.getCurrentWritingArea().textArea.setCaretPosition(downline);
-               }
+                	currentLineInfo.setLineText(row+1, text1);
+				}
+                currentLineInfo.setLineText(row, text2.replace("\n", ""));
 
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
+                currentLineInfo.reset();
+                
+                editor.workingManager.getCurrentWritingArea().textArea.setCaretPosition(currentLineInfo.tail[row]); 
         }
-        public void createNewLineAbove() {
-            //add one line above the current line
-            StringBuilder sb = new StringBuilder(editor.workingManager.getCurrentWritingArea().textArea.getText());
-            int a=currentLineInfo.getCaretPosition()-
-                    currentLineInfo.getColumn();//Expected caretlocation
-            sb.insert(a, "\n");
-            editor.workingManager.getCurrentWritingArea().textArea.setText(sb.toString());
-            editor.workingManager.getCurrentWritingArea().textArea.setCaretPosition(a);
-        }
+        
 
-        public void createNewLineBeneath() {
-            //add one line beneath the current line.
-            StringBuilder sb = new StringBuilder(editor.workingManager.getCurrentWritingArea().textArea.getText());
-            int a=currentLineInfo.getCaretPosition()
-                    +currentLineInfo.getLineText().length()
-                    -currentLineInfo.getColumn();//Expected caretlocation
-            boolean judge=currentLineInfo.getRow()==currentLineInfo.getRowCount();
-            sb.insert(a, "\n");
-            editor.workingManager.getCurrentWritingArea().textArea.setText(sb.toString());
-            if (!judge) {
-
-                editor.workingManager.getCurrentWritingArea().textArea.setCaretPosition(a);
-            }
-            else {
-                editor.workingManager.getCurrentWritingArea().textArea.append("");
-                editor.workingManager.getCurrentWritingArea().textArea.setCaretPosition(a+1);
-            }
-        }
+        
 
     }
 

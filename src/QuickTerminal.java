@@ -42,18 +42,18 @@ public class QuickTerminal {
 
     public interface CommandListener {
 
-        public void commandOutput(String text);
+        void commandOutput(String text);
 
-        public void commandCompleted(String cmd, int result);
+        void commandCompleted(String cmd, int result);
 
-        public void commandFailed(Exception exp);
+        void commandFailed(Exception exp);
     }
 
     public class ConsolePane extends JPanel implements CommandListener, Terminal {
 
-        private JTextArea textArea;
+        private final JTextArea textArea;
         private int userInputStart = 0;
-        private Command cmd;
+        private final Command cmd;
 
         public ConsolePane() {
 
@@ -131,17 +131,17 @@ public class QuickTerminal {
 
     public interface UserInput {
 
-        public int getUserInputStart();
+        int getUserInputStart();
     }
 
     public interface Terminal extends UserInput {
-        public void appendText(String text);
+        void appendText(String text);
     }
 
     public class AppendTask implements Runnable {
 
-        private Terminal terminal;
-        private String text;
+        private final Terminal terminal;
+        private final String text;
 
         public AppendTask(Terminal textArea, String text) {
             this.terminal = textArea;
@@ -156,7 +156,7 @@ public class QuickTerminal {
 
     public class Command {
 
-        private CommandListener listener;
+        private final CommandListener listener;
         private ProcessRunner runner;
 
         public Command(CommandListener listener) {
@@ -186,7 +186,7 @@ public class QuickTerminal {
                         cmd = cmd.substring(cmd.indexOf("\"") + 1);
 
                         if (!start.trim().isEmpty()) {
-                            String parts[] = start.trim().split(" ");
+                            String[] parts = start.trim().split(" ");
                             values.addAll(Arrays.asList(parts));
                         }
                         values.add(quote.trim());
@@ -194,7 +194,7 @@ public class QuickTerminal {
                     }
 
                     if (!cmd.trim().isEmpty()) {
-                        String parts[] = cmd.trim().split(" ");
+                        String[] parts = cmd.trim().split(" ");
                         values.addAll(Arrays.asList(parts));
                     }
 
@@ -205,7 +205,7 @@ public class QuickTerminal {
                 } else {
 
                     if (!cmd.trim().isEmpty()) {
-                        String parts[] = cmd.trim().split(" ");
+                        String[] parts = cmd.trim().split(" ");
                         values.addAll(Arrays.asList(parts));
                     }
 
@@ -224,8 +224,8 @@ public class QuickTerminal {
 
     public class ProcessRunner extends Thread {
 
-        private List<String> cmds;
-        private CommandListener listener;
+        private final List<String> cmds;
+        private final CommandListener listener;
 
         private Process process;
 
@@ -272,8 +272,8 @@ public class QuickTerminal {
 
     public class StreamReader extends Thread {
 
-        private InputStream is;
-        private CommandListener listener;
+        private final InputStream is;
+        private final CommandListener listener;
 
         public StreamReader(CommandListener listener, InputStream is) {
             this.is = is;
@@ -296,7 +296,7 @@ public class QuickTerminal {
 
     public class ProtectedDocumentFilter extends DocumentFilter {
 
-        private UserInput userInput;
+        private final UserInput userInput;
 
         public ProtectedDocumentFilter(UserInput userInput) {
             this.userInput = userInput;

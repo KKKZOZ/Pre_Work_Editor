@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets;
 
 public class trycmd {
 
-    public static void main(String args[]) throws Exception {
+    public static void main(String[] args) throws Exception {
         String cmd = "cmd";
         Process process = Runtime.getRuntime().exec(cmd);
         OutputStream outputStream = process.getOutputStream();

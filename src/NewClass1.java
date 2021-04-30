@@ -17,7 +17,7 @@ public class NewClass1 extends JFrame {
             fontColor = null, fontBackColor = null; // 字体名称;字号大小;文字样式;文字颜色;文字背景颜色
 
     private StyledDocument doc = null;
-    private CustomizeStyledDocument testDoc=new CustomizeStyledDocument(-1);
+    private final CustomizeStyledDocument testDoc=new CustomizeStyledDocument(-1);
     private Document deDoc=null;
 
     //Constructor
@@ -146,7 +146,7 @@ public class NewClass1 extends JFrame {
 
         SimpleAttributeSet testSet = new SimpleAttributeSet();
         StyleConstants.setForeground(testSet, Color.BLUE);
-        doc.setCharacterAttributes(0, doc.getLength(),(AttributeSet) testSet,false);
+        doc.setCharacterAttributes(0, doc.getLength(), testSet,false);
         text.setDocument(doc);
         Font font =new Font("monospaced",Font.BOLD,30);
         text.setFont(font);
@@ -216,7 +216,7 @@ public class NewClass1 extends JFrame {
         return att;
     }//End of getFontAttrib
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         new NewClass1();
     }
 

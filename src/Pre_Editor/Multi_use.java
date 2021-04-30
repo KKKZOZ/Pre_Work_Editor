@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Multi_use {
-    private Pre_Editor editor;
+    private final Pre_Editor editor;
     public JPanel southPanel;
     public JTabbedPane multiPane;
 

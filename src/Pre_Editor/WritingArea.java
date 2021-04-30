@@ -158,7 +158,11 @@ public class WritingArea {
 //                    keyChar = Character.toUpperCase(keyChar);
 //                }
 
-                if (keyChar == ActionExeManager.KEY_EVENT_P && e.isControlDown()) {
+//                System.out.println((int)keyChar);
+                if (keyChar == 40 && e.isShiftDown()) {
+
+                }
+                if (keyChar == ActionExeManager.KEY_EVENT_N && e.isControlDown()) {
 
                     editor.actionExeManager.getActionExe(1).exe();
                 }
@@ -215,7 +219,19 @@ public class WritingArea {
 
                     editor.actionExeManager.getActionExe(14).exe();
                 }
+                if (keyChar == ActionExeManager.KEY_EVENT_G && e.isControlDown()) {
 
+                    editor.actionExeManager.getActionExe(15).exe();
+                }
+                if (keyChar == ActionExeManager.KEY_EVENT_M && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(16).exe();
+                }
+                if (keyChar == ActionExeManager.KEY_EVENT_P && e.isControlDown()) {
+
+                    editor.actionExeManager.getActionExe(17).exe();
+                }
+               
             }
 
             @Override
