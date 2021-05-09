@@ -48,7 +48,9 @@ public class EditorMenu {
         ArrayList<MenuDetail> tools = new ArrayList<MenuDetail>();
         tools.add(new MenuDetail("Calculate", 'c',false));
         tools.add(new MenuDetail("Cmd", 'd', false));
-        tools.add(new MenuDetail("Markdown Preview", 'M',false));
+        tools.add(new MenuDetail("Markdown Preview", 'M',true));
+        tools.add(new MenuDetail("Compile", 'o', false));
+        tools.add(new MenuDetail("Run", 'r', false));
         creatMenuItem(tools);
 
 
@@ -125,6 +127,12 @@ public class EditorMenu {
                     return;
                 }
 
+            }
+            if ("Compile".equals(e.getActionCommand())) {
+                editor.actions.compile();
+            }
+            if ("Run".equals(e.getActionCommand())) {
+                editor.actions.run();
             }
 
         }//End of actionPerformed

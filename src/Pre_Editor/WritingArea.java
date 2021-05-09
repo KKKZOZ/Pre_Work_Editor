@@ -29,7 +29,9 @@ public class WritingArea {
     public Gutter gutter;
     private RTextScrollPane textScrollPane;
     private String fileDir;
+    private String fileName;
     private boolean markdownOpen = false;
+    private boolean compileCheck = false;
 
 
     //Constructor
@@ -42,6 +44,7 @@ public class WritingArea {
         this.createWritingArea();
         currentLineInfo = new CurrentLineInfo(textArea);
         this.fileDir = "";
+        this.fileName = "";
     }
 
 
@@ -58,12 +61,12 @@ public class WritingArea {
         textArea.setCloseCurlyBraces(true);
         textArea.setPopupMenu(null);
         textArea.setBracketMatchingEnabled(true);
-        textArea.setCurrentLineHighlightColor(new Color(80, 80, 80));
+//        textArea.setCurrentLineHighlightColor(new Color(80, 80, 80));
         textArea.setBackground(Color.DARK_GRAY);
         textArea.setForeground(Color.LIGHT_GRAY);
-        textArea.setSelectionColor(new Color(50, 50, 255));
+//        textArea.setSelectionColor(new Color(50, 50, 255));
         addKeyShortCut();
-        changeStyle();
+//        changeStyle();
         extendTextArea();
     }
 
@@ -86,6 +89,7 @@ public class WritingArea {
 //                System.out.println((int)keyChar);
                 int keyCode = e.getKeyCode();
 //                System.out.println((int)keyChar);
+
 
                 //When Ctrl + N is pressed
                 if (keyChar == ActionExeManager.KEY_EVENT_N && e.isControlDown()) {
@@ -184,10 +188,11 @@ public class WritingArea {
                     editor.actionExeManager.getActionExe(16).exe();
                 }
 
-                ////When Ctrl + P is pressed
+                //When Ctrl + P is pressed
                 if (keyChar == ActionExeManager.KEY_EVENT_P && e.isControlDown()) {
 
                     editor.actionExeManager.getActionExe(17).exe();
+
                 }
 
 
@@ -195,6 +200,17 @@ public class WritingArea {
 
             @Override
             public void keyReleased(KeyEvent e) {
+
+                char keyChar = e.getKeyChar();
+                if (keyChar == ActionExeManager.KEY_EVENT_OPEN_BRACKET) {
+                    editor.workingManager.getCurrentWritingArea().getCurrentLineInfo().insertAtCaretPosition(")");
+                    editor.workingManager.getCurrentWritingArea().getCurrentLineInfo().setCaretOffSet(-1);
+                }
+
+                if (keyChar == ActionExeManager.KEY_EVENT_OPEN_PARENTHESIS) {
+                    editor.workingManager.getCurrentWritingArea().getCurrentLineInfo().insertAtCaretPosition("]");
+                    editor.workingManager.getCurrentWritingArea().getCurrentLineInfo().setCaretOffSet(-1);
+                }
 
             }
         });
@@ -301,5 +317,21 @@ public class WritingArea {
 
     public void setMarkdownIsOpen(boolean isMarkdownOpen) {
         this.markdownOpen = isMarkdownOpen;
+    }
+
+    public boolean isCompileCheck() {
+        return compileCheck;
+    }
+
+    public void setCompileCheck(boolean compileCheck) {
+        this.compileCheck = compileCheck;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }

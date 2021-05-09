@@ -21,6 +21,7 @@ public class Pre_Editor {
     public Multi_use multiUse;
     public ActionExeManager actionExeManager;
     public WorkingManager workingManager;
+    public CustomizeManager customizeManager;
     public SaveToLocal saveToLocal;
 
     /**The main method**/
@@ -35,6 +36,7 @@ public class Pre_Editor {
     public Pre_Editor() {
         this.mainPanel= new JPanel(new BorderLayout());
         this.initializeMainframe();
+        this.customizeManager = new CustomizeManager(this);
         this.workingManager = new WorkingManager(this);
         this.multiUse = new Multi_use(this);
         this.editorMenu = new EditorMenu(this);

@@ -46,6 +46,8 @@ public class ActionExeManager {
     public static final int KEY_EVENT_UP = 38;
     public static final int KEY_EVENT_RIGHT = 39;
     public static final int KEY_EVENT_DOWN = 40;
+    public static final int KEY_EVENT_OPEN_PARENTHESIS = 40;
+    public static final int KEY_EVENT_OPEN_BRACKET = 91;
 
     private final Pre_Editor editor;
     private ActionExe actionExe1;

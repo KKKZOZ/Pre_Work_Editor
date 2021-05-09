@@ -37,7 +37,7 @@ public class Terminal {
             @Override
             public void actionPerformed(ActionEvent e) {
                 textArea.setText("");
-               initCmd();
+                initCmd();
                 try {
                     initTextArea();
                 } catch (Exception exception) {
@@ -45,17 +45,6 @@ public class Terminal {
                 }
             }
         });
-    }
-
-    public void initCmd() {
-        try {
-            process = Runtime.getRuntime().exec("cmd");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        outputStream = process.getOutputStream();
-        stdout = process.getInputStream();
-        stderr = process.getErrorStream();
     }
 
     public static String filterSimpleTTY(String s) {
@@ -91,6 +80,37 @@ public class Terminal {
         thread.start();
     }
 
+    public void initCmd() {
+        try {
+            process = Runtime.getRuntime().exec("cmd");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        outputStream = process.getOutputStream();
+        stdout = process.getInputStream();
+        stderr = process.getErrorStream();
+    }
+
+    public void execute(String command) {
+        String action = command + "\n";
+        try {
+            outputStream.write(action.getBytes(StandardCharsets.UTF_8));
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+        try {
+            outputStream.flush();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+        print(stdout);
+        print(stderr);
+//                    System.out.println("!!!!!!!!!!!!!!!");
+//                    System.out.println(lineInfo.getTail(lineInfo.getColumn()));
+//                    lineInfo.setCaretPosition(lineInfo.getTail(lineInfo.getColumn()));
+    }
+
+
     public void initTextArea() throws Exception {
         String action = "cd src/";
         action += "\n";
@@ -116,22 +136,8 @@ public class Terminal {
                 char keyChar = e.getKeyChar();
                 if (keyChar == 10) {
                     String action = lineInfo.getLineText();
-                    action += "\n";
-                    try {
-                        outputStream.write(action.getBytes(StandardCharsets.UTF_8));
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    try {
-                        outputStream.flush();
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                    print(stdout);
-                    print(stderr);
-//                    System.out.println("!!!!!!!!!!!!!!!");
-//                    System.out.println(lineInfo.getTail(lineInfo.getColumn()));
-//                    lineInfo.setCaretPosition(lineInfo.getTail(lineInfo.getColumn()));
+                    execute(action);
+
                 }
             }
 

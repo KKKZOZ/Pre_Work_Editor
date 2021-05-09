@@ -30,6 +30,7 @@ public class WorkingManager {
 
     public void newTab(String title) {
         WritingArea temp = new WritingArea(editor);
+        editor.customizeManager.setCurrentTextArea(temp.getTextArea());
         writingAreaList.add(temp);
         workingTabbedPane.addTab(title, temp.writingArea);
         tabCount = workingTabbedPane.getTabCount();
@@ -54,6 +55,10 @@ public class WorkingManager {
     public WritingArea getCurrentWritingArea() {
         int index = workingTabbedPane.getSelectedIndex();
         return writingAreaList.get(index);
+    }
+
+    public void setCurrentTabTitle(String title) {
+        this.workingTabbedPane.setTitleAt(workingTabbedPane.getSelectedIndex(), title);
     }
 
     public ArrayList<WritingArea> getWritingAreaList() {

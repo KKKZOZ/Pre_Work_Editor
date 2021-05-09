@@ -34,6 +34,8 @@ public class Actions {
                 }
                 editor.workingManager.getCurrentWritingArea().textArea.setText(fileContent.toString());
                 editor.workingManager.getCurrentWritingArea().setFileDir(file.getPath());
+                editor.workingManager.getCurrentWritingArea().setFileName(file.getName());
+                editor.workingManager.setCurrentTabTitle(file.getName());
                 reader.close();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(editor.mainframe, "Error opening file!");
@@ -44,6 +46,22 @@ public class Actions {
 
     public void saveFile() {
         String filePath = editor.workingManager.getCurrentWritingArea().getFileDir();
+        if ("".equals(filePath)) {
+            JFileChooser fileChooser = new JFileChooser();
+            int status = fileChooser.showSaveDialog(editor.mainframe);
+            if (status == JFileChooser.APPROVE_OPTION) {
+                try {
+                    File file = fileChooser.getSelectedFile();
+                    filePath = file.getPath();
+                    String fileName = file.getName();
+                    editor.workingManager.getCurrentWritingArea().setFileName(fileName);
+                    editor.workingManager.setCurrentTabTitle(fileName);
+                } catch (Exception e) {
+                    System.err.println(e);
+                }
+            }
+            editor.workingManager.getCurrentWritingArea().setFileDir(filePath);
+        }
         BufferedWriter bufferedWriter = null;
         try {
             bufferedWriter = new BufferedWriter(new FileWriter(filePath, false));
@@ -63,6 +81,37 @@ public class Actions {
         }
 
     }//End of saveFile
+
+    public void compile() {
+        String filePath = editor.workingManager.getCurrentWritingArea().getFileDir();
+        System.out.println(filePath);
+        if ("".equals(filePath)) {
+            saveFile();
+        }
+        filePath = editor.workingManager.getCurrentWritingArea().getFileDir();
+        String command = "javac -encoding UTF-8 " + filePath;
+        editor.multiUse.terminal.execute(command);
+        editor.workingManager.getCurrentWritingArea().setCompileCheck(true);
+    }
+
+    public void run() {
+        if (!editor.workingManager.getCurrentWritingArea().isCompileCheck()) {
+            editor.statusBar.textField.setText("You have to compile first!");
+            return;
+        }
+        if (editor.workingManager.getCurrentWritingArea().isCompileCheck()) {
+            editor.statusBar.clear();
+        }
+        String filePath = editor.workingManager.getCurrentWritingArea().getFileDir();
+        String fileName = editor.workingManager.getCurrentWritingArea().getFileName();
+        String filePurePath = filePath.substring(0, filePath.length() - fileName.length());
+        String filePureName = fileName.substring(0, fileName.length() - 5);
+        String command = "cd " + filePurePath;
+        editor.multiUse.terminal.execute(command);
+        command = "java " + filePureName;
+        editor.multiUse.terminal.execute(command);
+
+    }
 
 
     
