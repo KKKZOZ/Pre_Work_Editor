@@ -9,12 +9,12 @@ import java.util.ArrayList;
 public class EditorMenu {
 
 
-    public JMenuBar menuBar = new JMenuBar();
-    public JMenu menu = null;
-    public JMenuItem menuItem = null;
     //Field
     private final Pre_Editor editor;
     private final MenuActionListener menuActionListener = new MenuActionListener();
+    public JMenuBar menuBar = new JMenuBar();
+    public JMenu menu = null;
+    public JMenuItem menuItem = null;
     private MarkdownPreview markdownPreview;
 
     //Constructor
@@ -36,7 +36,7 @@ public class EditorMenu {
         ArrayList<MenuDetail> file = new ArrayList<MenuDetail>();
 
         file.add(new MenuDetail("New", 'n', false));
-        file.add(new MenuDetail("Close",'c' , true));
+        file.add(new MenuDetail("Close", 'c', true));
         file.add(new MenuDetail("Open", 'o', false));
         file.add(new MenuDetail("Save", 's', false));
         file.add(new MenuDetail("Quick Operation", 'q', false));
@@ -46,20 +46,34 @@ public class EditorMenu {
         menu = new JMenu("Tools");
         menu.setMnemonic('T');
         ArrayList<MenuDetail> tools = new ArrayList<MenuDetail>();
-        tools.add(new MenuDetail("Calculate", 'c',false));
+        tools.add(new MenuDetail("Calculate", 'c', false));
         tools.add(new MenuDetail("Cmd", 'd', false));
-        tools.add(new MenuDetail("Markdown Preview", 'M',true));
+        tools.add(new MenuDetail("Markdown Preview", 'M', true));
         tools.add(new MenuDetail("Compile", 'o', false));
         tools.add(new MenuDetail("Run", 'r', false));
         creatMenuItem(tools);
 
+        menu = new JMenu("Run");
+        menu.setMnemonic('R');
+        ArrayList<MenuDetail> runs = new ArrayList<MenuDetail>();
+        runs.add(new MenuDetail("Compile", 'C', false));
+        runs.add(new MenuDetail("Run", 'R', false));
+        runs.add(new MenuDetail("Compile && Run", '&', false));
+        creatMenuItem(runs);
 
         //Menu fo Settings
         menu = new JMenu("Settings");
         menu.setMnemonic('s');
         ArrayList<MenuDetail> settings = new ArrayList<MenuDetail>();
-        settings.add(new MenuDetail("Settings", 's',true));
+        settings.add(new MenuDetail("Settings", 's', true));
         creatMenuItem(settings);
+
+        menu = new JMenu("Help");
+        menu.setMnemonic('H');
+        ArrayList<MenuDetail> helps = new ArrayList<MenuDetail>();
+        helps.add(new MenuDetail("ShortcutReference", 'S', false));
+        creatMenuItem(helps);
+
 
     }//End of createMenuBar
 
@@ -85,7 +99,7 @@ public class EditorMenu {
         public void actionPerformed(ActionEvent e) {
             if ("New".equals(e.getActionCommand())) {
                 System.out.println("New");
-                editor.workingManager.newTab("Untitled");
+                editor.workingManager.newTextTab("Untitled");
 //                new QuickCommand(editor);
             }
             if ("Close".equals(e.getActionCommand())) {
@@ -133,6 +147,12 @@ public class EditorMenu {
             }
             if ("Run".equals(e.getActionCommand())) {
                 editor.actions.run();
+            }
+            if ("Compile && Run".equals(e.getActionCommand())) {
+                editor.actions.compileAndRun();
+            }
+            if ("ShortcutReference".equals(e.getActionCommand())) {
+                editor.actions.showShortcutReference();
             }
 
         }//End of actionPerformed

@@ -63,7 +63,7 @@ public class WritingArea {
         textArea.setBracketMatchingEnabled(true);
 //        textArea.setCurrentLineHighlightColor(new Color(80, 80, 80));
         textArea.setBackground(Color.DARK_GRAY);
-        textArea.setForeground(Color.LIGHT_GRAY);
+        //textArea.setForeground(Color.LIGHT_GRAY);
 //        textArea.setSelectionColor(new Color(50, 50, 255));
         addKeyShortCut();
 //        changeStyle();
@@ -88,13 +88,17 @@ public class WritingArea {
 
 //                System.out.println((int)keyChar);
                 int keyCode = e.getKeyCode();
-//                System.out.println((int)keyChar);
 
 
                 //When Ctrl + N is pressed
+                //Ctrl + N        New
+
+
                 if (keyChar == ActionExeManager.KEY_EVENT_N && e.isControlDown()) {
 
+                    editor.actionExeManager.getActionExe(1).setFunction(2);
                     editor.actionExeManager.getActionExe(1).exe();
+
                 }
 
                 //When Ctrl + O is pressed
@@ -202,12 +206,12 @@ public class WritingArea {
             public void keyReleased(KeyEvent e) {
 
                 char keyChar = e.getKeyChar();
-                if (keyChar == ActionExeManager.KEY_EVENT_OPEN_BRACKET) {
+                if (keyChar == ActionExeManager.KEY_EVENT_OPEN_PARENTHESIS) {
                     editor.workingManager.getCurrentWritingArea().getCurrentLineInfo().insertAtCaretPosition(")");
                     editor.workingManager.getCurrentWritingArea().getCurrentLineInfo().setCaretOffSet(-1);
                 }
 
-                if (keyChar == ActionExeManager.KEY_EVENT_OPEN_PARENTHESIS) {
+                if (keyChar == ActionExeManager.KEY_EVENT_OPEN_BRACKET) {
                     editor.workingManager.getCurrentWritingArea().getCurrentLineInfo().insertAtCaretPosition("]");
                     editor.workingManager.getCurrentWritingArea().getCurrentLineInfo().setCaretOffSet(-1);
                 }

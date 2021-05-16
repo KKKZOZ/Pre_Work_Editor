@@ -9,9 +9,11 @@ import java.io.*;
 public class Actions {
     public static final int OPEN_FILE = 0;
     public static final int SAVE_FILE = 1;
+
     //Field
     private final Pre_Editor editor;
     private final TextAction textAction;
+
 
     //Constructor
     public Actions(Pre_Editor editor) {
@@ -110,9 +112,79 @@ public class Actions {
         editor.multiUse.terminal.execute(command);
         command = "java " + filePureName;
         editor.multiUse.terminal.execute(command);
-
     }
 
+    public void compileAndRun() {
+        compile();
+        run();
+        return;
+    }
+    public void showShortcutReference() {
+        String[] functionList= {"","New","Open","Save",
+                "Create New Line Beneath","Create New Line Above",
+                "Calculate","CMD","Quick Operation","Markdown Preview",
+                "Settings","About","Up Change","Down Change","Close Tab","Pageup","Pagedown"};
+        String[] keyList= {"","Ctrl + N","Ctrl + O","Ctrl + S","Ctrl + Q","Ctrl + W",
+                "Ctrl + E","Ctrl + R","Ctrl + T","Ctrl + U","Ctrl + I","Ctrl + L","Ctrl + K",
+                "Ctrl + J","Ctrl + H","Ctrl + Shift + Left","Ctrl + Shift + Right","Ctrl + P"};
+        StringBuilder shortcutList= new StringBuilder();
+
+        for(int i=1;i<keyList.length;i++) {
+            if(editor.actionExeManager.getActionExe(i).getFunction()==1) {
+                shortcutList.append(keyList[i]).append("          ").append(functionList[1]).append("\n");
+            }
+            if(editor.actionExeManager.getActionExe(i).getFunction()==2) {
+                shortcutList.append(keyList[i]).append("          ").append(functionList[2]).append("\n");
+            }
+            if(editor.actionExeManager.getActionExe(i).getFunction()==3) {
+                shortcutList.append(keyList[i]).append("          ").append(functionList[3]).append("\n");
+            }
+            if(editor.actionExeManager.getActionExe(i).getFunction()==4) {
+                shortcutList.append(keyList[i]).append("          ").append(functionList[4]).append("\n");
+            }
+            if(editor.actionExeManager.getActionExe(i).getFunction()==5) {
+                shortcutList.append(keyList[i]).append("          ").append(functionList[5]).append("\n");
+            }
+            if(editor.actionExeManager.getActionExe(i).getFunction()==6) {
+                shortcutList.append(keyList[i]).append("          ").append(functionList[6]).append("\n");
+            }
+            if(editor.actionExeManager.getActionExe(i).getFunction()==7) {
+                shortcutList.append(keyList[i]).append("          ").append(functionList[7]).append("\n");
+            }
+            if(editor.actionExeManager.getActionExe(i).getFunction()==8) {
+                shortcutList.append(keyList[i]).append("          ").append(functionList[8]).append("\n");
+            }
+            if(editor.actionExeManager.getActionExe(i).getFunction()==9) {
+                shortcutList.append(keyList[i]).append("          ").append(functionList[9]).append("\n");
+            }
+            if(editor.actionExeManager.getActionExe(i).getFunction()==10) {
+                shortcutList.append(keyList[i]).append("          ").append(functionList[10]).append("\n");
+            }
+            if(editor.actionExeManager.getActionExe(i).getFunction()==11) {
+                shortcutList.append(keyList[i]).append("          ").append(functionList[11]).append("\n");
+            }
+            if(editor.actionExeManager.getActionExe(i).getFunction()==12) {
+                shortcutList.append(keyList[i]).append("          ").append(functionList[12]).append("\n");
+            }
+            if(editor.actionExeManager.getActionExe(i).getFunction()==13) {
+                shortcutList.append(keyList[i]).append("          ").append(functionList[13]).append("\n");
+            }
+            if(editor.actionExeManager.getActionExe(i).getFunction()==14) {
+                shortcutList.append(keyList[i]).append("          ").append(functionList[14]).append("\n");
+            }
+            if(editor.actionExeManager.getActionExe(i).getFunction()==15) {
+                shortcutList.append(keyList[i]).append("          ").append(functionList[15]).append("\n");
+            }
+            if(editor.actionExeManager.getActionExe(i).getFunction()==16) {
+                shortcutList.append(keyList[i]).append("          ").append(functionList[16]).append("\n");
+            }
+        }
+        editor.workingManager.newTextTab("ShortcutReference");
+        editor.workingManager.setSelectedIndex(editor.workingManager.getTabCount()-1);
+        editor.workingManager.getCurrentWritingArea().textArea.setText(shortcutList.toString());
+        editor.workingManager.getCurrentWritingArea().textArea.setEditable(false);
+
+    }
 
     
     
@@ -120,7 +192,7 @@ public class Actions {
     public void actionPerforming(int action) {
     	
         if (action == ActionExeManager.NEW_TAB) {
-            editor.workingManager.newTab("Untitled");
+            editor.workingManager.newTextTab("Untitled");
         }
         if (action == ActionExeManager.OPEN_FILE) {
             this.openFile();

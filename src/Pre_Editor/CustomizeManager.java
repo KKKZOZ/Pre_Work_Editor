@@ -43,6 +43,13 @@ public class CustomizeManager {
         selectionColor = DARK_GRAY_USED_BLUE;
     }
 
+    public void refresh() {
+        ArrayList<WritingArea> writingAreaList = editor.workingManager.getWritingAreaList();
+        for (WritingArea temp : writingAreaList) {
+            setCurrentTextArea(temp.getTextArea());
+        }
+    }
+
     public void setCurrentTextArea(RSyntaxTextArea textArea) {
         setColor(textArea);
     }
@@ -57,6 +64,8 @@ public class CustomizeManager {
     private void setColor(RSyntaxTextArea textArea) {
         textArea.setCurrentLineHighlightColor(lineHighlightColor);
         textArea.setSelectionColor(selectionColor);
+        textArea.setBackground(backgroundColor);
+        textArea.setForeground(foregroundColor);
         SyntaxScheme scheme = textArea.getSyntaxScheme();
         scheme.getStyle(Token.RESERVED_WORD).foreground = reservedWordColor;
         scheme.getStyle(Token.RESERVED_WORD_2).foreground = reservedWordColor;

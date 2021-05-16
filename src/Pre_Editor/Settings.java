@@ -100,8 +100,12 @@ public class Settings {
         }
         if (SettingsPath.HIGHLIGHT_PATH.equals(action)) {
             System.out.println("2");
-            CustomizeHighlight customizeHighlight=new CustomizeHighlight(editor);
-            settingPanel.add(customizeHighlight.mainPanel, BorderLayout.CENTER);
+//            TestGUI testGUI = new TestGUI(editor);
+//            settingPanel.add(testGUI.getMainPanel(), BorderLayout.CENTER);
+//            CustomizeHighlight customizeHighlight=new CustomizeHighlight(editor);
+//            settingPanel.add(customizeHighlight.mainPanel, BorderLayout.CENTER);
+            test test = new test(editor);
+            settingPanel.add(test.getMainPanel(),BorderLayout.CENTER);
         }
     }
 
