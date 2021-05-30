@@ -96,7 +96,7 @@ public class WritingArea {
 
                 if (keyChar == ActionExeManager.KEY_EVENT_N && e.isControlDown()) {
 
-                    editor.actionExeManager.getActionExe(1).setFunction(2);
+                    //editor.actionExeManager.getActionExe(1).setFunction(2);
                     editor.actionExeManager.getActionExe(1).exe();
 
                 }

@@ -1,7 +1,17 @@
 package Pre_Editor;
 
 import javax.swing.*;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONException;
+import net.sf.json.JSONObject;
+
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.TimerTask;
+import java.util.Timer;
+
 
 /**
  * @author KKKZOZ
@@ -186,13 +196,66 @@ public class Actions {
 
     }
 
-    
-    
+    public void translate() {
+        String oringin=editor.workingManager.getCurrentWritingArea().textArea.getSelectedText();
+        oringin=oringin.trim();
+        String httpUrl = "http://api.tianapi.com/txapi/enwords/index?key=7861a9abd54f815dd1c29a008dc6fef0&word="+oringin;
+        BufferedReader reader = null;
+        String result = null;
+        StringBuffer sbf = new StringBuffer();
+        String mm="";
+        try {
+            URL url = new URL(httpUrl);
+            HttpURLConnection connection = (HttpURLConnection) url
+                    .openConnection();
+            connection.setRequestMethod("GET");
+            InputStream is = connection.getInputStream();
+            reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+            String strRead = null;
+            while ((strRead = reader.readLine()) != null) {
+                sbf.append(strRead);
+                sbf.append("\r\n");
+            }
+            reader.close();
+            result = sbf.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        JSONObject jObject1=new JSONObject(result);
+        //解析第二层----数组
+        try {
+            JSONArray jsonArray2=jObject1.getJSONArray("newslist");
+
+
+            //遍历数组获取元素----对象
+
+            for(int i=0;i<jsonArray2.length();i++){
+                //解析第三层----对象
+                JSONObject jObject3=jsonArray2.getJSONObject(i);
+                mm=jObject3.getString("content");
+            }
+        }
+        catch (Exception e) {
+            // TODO: handle exception
+            mm="Not Found";
+        }
+
+        editor.statusBar.textField.setText(mm);
+        Timer timer = new Timer();
+        MyTask myTask=new MyTask();
+        myTask.seteditor(editor);
+        timer.schedule(myTask,10000);
+    }
+
+
+
 
     public void actionPerforming(int action) {
     	
         if (action == ActionExeManager.NEW_TAB) {
             editor.workingManager.newTextTab("Untitled");
+       
         }
         if (action == ActionExeManager.OPEN_FILE) {
             this.openFile();
@@ -207,8 +270,8 @@ public class Actions {
         	editor.workingManager.getCurrentWritingArea().getCurrentLineInfo().createNewLineAbove();
         }
         if (action == ActionExeManager.CALCULATE) {
-           
-             new Calculate(editor);
+           new Calculate(editor);
+        	//this.translate();
         }
         if (action == ActionExeManager.CMD) {
 //TODO
@@ -307,8 +370,21 @@ public class Actions {
         
 
         
+        }
 
-    }
 
+}
 
+class MyTask extends TimerTask{
+
+	Pre_Editor editor;
+	@Override
+	public void run() {
+		
+		editor.statusBar.textField.setText("");
+	}
+	public void seteditor(Pre_Editor editor) {
+		this.editor=editor;
+	}
+	
 }

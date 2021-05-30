@@ -36,6 +36,7 @@ public class test {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                     editor.customizeManager.setForegroundColor(getSelectedColor(comboBox2, e));
                     editor.customizeManager.refresh();
+                    editor.saveToLocal.saveSettings();
                 }
             }
         });

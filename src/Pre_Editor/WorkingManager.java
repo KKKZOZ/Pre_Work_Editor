@@ -2,6 +2,8 @@ package Pre_Editor;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
@@ -11,8 +13,8 @@ public class WorkingManager {
 
     private final Pre_Editor editor;
     private final JTabbedPane workingTabbedPane;
-    private int tabCount;
     private final ArrayList<WritingArea> writingAreaList;
+    private int tabCount;
 
 
     public WorkingManager(Pre_Editor editor) {
@@ -31,6 +33,21 @@ public class WorkingManager {
         writingAreaList.add(temp);
         workingTabbedPane.addTab(title, temp.writingArea);
         tabCount = workingTabbedPane.getTabCount();
+        JPanel titlePane = new JPanel(new BorderLayout());
+        JLabel titleLabel = new JLabel(title);
+        titlePane.add(titleLabel, BorderLayout.CENTER);
+
+        JButton closeButton = new JButton();
+
+        titlePane.add(closeButton, BorderLayout.EAST);
+
+        closeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                closeSelectedTab(getSelectedIndex());
+            }
+        });
+        workingTabbedPane.setTabComponentAt(tabCount - 1, titlePane);
     }
 
     public void closeSelectedTab(int index) {
@@ -49,6 +66,7 @@ public class WorkingManager {
     public int getTabCount() {
         return tabCount;
     }
+
     public WritingArea getCurrentWritingArea() {
         int index = workingTabbedPane.getSelectedIndex();
         return writingAreaList.get(index);

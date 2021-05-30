@@ -48,7 +48,8 @@ public class EditorMenu {
         ArrayList<MenuDetail> tools = new ArrayList<MenuDetail>();
         tools.add(new MenuDetail("Calculate", 'c', false));
         tools.add(new MenuDetail("Cmd", 'd', false));
-        tools.add(new MenuDetail("Markdown Preview", 'M', true));
+        tools.add(new MenuDetail("Markdown Preview", 'M', false));
+        tools.add(new MenuDetail("Translate", 'T', true));
         tools.add(new MenuDetail("Compile", 'o', false));
         tools.add(new MenuDetail("Run", 'r', false));
         creatMenuItem(tools);
@@ -72,6 +73,7 @@ public class EditorMenu {
         menu.setMnemonic('H');
         ArrayList<MenuDetail> helps = new ArrayList<MenuDetail>();
         helps.add(new MenuDetail("ShortcutReference", 'S', false));
+        helps.add(new MenuDetail("Copyright", 'C', false));
         creatMenuItem(helps);
 
 
@@ -142,6 +144,9 @@ public class EditorMenu {
                 }
 
             }
+            if ("Translate".equals(e.getActionCommand())) {
+                editor.actions.translate();
+            }
             if ("Compile".equals(e.getActionCommand())) {
                 editor.actions.compile();
             }
@@ -153,6 +158,9 @@ public class EditorMenu {
             }
             if ("ShortcutReference".equals(e.getActionCommand())) {
                 editor.actions.showShortcutReference();
+            }
+            if ("Copyright".equals(e.getActionCommand())) {
+                 Copyright.getInstance();
             }
 
         }//End of actionPerformed

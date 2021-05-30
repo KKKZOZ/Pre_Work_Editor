@@ -24,17 +24,11 @@ public class Pre_Editor {
     public CustomizeManager customizeManager;
     public SaveToLocal saveToLocal;
 
-    /**The main method**/
-    public static void main(String[] args) {
-        initializeUI();
-        new Pre_Editor();
-
-    }
-
-
-    /**Constructor**/
+    /**
+     * Constructor
+     **/
     public Pre_Editor() {
-        this.mainPanel= new JPanel(new BorderLayout());
+        this.mainPanel = new JPanel(new BorderLayout());
         this.initializeMainframe();
         this.customizeManager = new CustomizeManager(this);
         this.workingManager = new WorkingManager(this);
@@ -46,10 +40,29 @@ public class Pre_Editor {
         this.actions = new Actions(this);
         this.actionExeManager = new ActionExeManager(this);
         this.saveToLocal = new SaveToLocal(this);
+        Copyright.setEditor(this);
     }//end of Constructor
 
+    /**
+     * The main method
+     **/
+    public static void main(String[] args) {
+        initializeUI();
+        new Pre_Editor();
 
-    /**Initialize the mainframe**/
+    }
+
+    public static void initializeUI() {
+        try {
+            UIManager.setLookAndFeel(new DarculaLaf());
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Initialize the mainframe
+     **/
     public void initializeMainframe() {
 
         mainframe = new JFrame();
@@ -73,14 +86,6 @@ public class Pre_Editor {
         mainframe.setContentPane(mainPanel);
 
     }//End of initializeMainframe
-
-    public static void initializeUI() {
-        try {
-            UIManager.setLookAndFeel(new DarculaLaf());
-        } catch (UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
-        }
-    }
 
 
 }
